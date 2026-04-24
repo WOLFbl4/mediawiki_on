@@ -1,5 +1,7 @@
 # mediawiki_on
 
+[Русская версия](README.ru.md)
+
 Ansible project for deploying `MediaWiki` with `PostgreSQL 16` on `Ubuntu 24.04`.
 
 What this project does:
