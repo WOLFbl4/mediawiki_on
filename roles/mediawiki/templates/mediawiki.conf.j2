@@ -1,0 +1,62 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name {{ mediawiki_server_name }};
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name {{ mediawiki_server_name }};
+
+    ssl_certificate {{ mediawiki_ssl_cert_path }};
+    ssl_certificate_key {{ mediawiki_ssl_key_path }};
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:MediaWikiSSL:10m;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers off;
+
+    client_max_body_size 100m;
+    index index.php;
+
+    location = / {
+        return 301 {{ mediawiki_script_path }}/;
+    }
+
+    location = {{ mediawiki_script_path }} {
+        return 301 {{ mediawiki_script_path }}/;
+    }
+
+    location = {{ mediawiki_script_path }}/LocalSettings.php {
+        deny all;
+    }
+
+    location ~ ^{{ mediawiki_script_path | regex_escape }}/(?:cache|includes|languages|maintenance|serialized|tests)/ {
+        deny all;
+    }
+
+    location {{ mediawiki_script_path }}/ {
+        alias {{ mediawiki_current_path }}/;
+        index index.php;
+        try_files $request_filename $request_filename/ {{ mediawiki_script_path }}/index.php?$args;
+    }
+
+    location ~ ^{{ mediawiki_script_path | regex_escape }}/(.+\.php)$ {
+        alias {{ mediawiki_current_path }}/$1;
+        include snippets/fastcgi-php.conf;
+        fastcgi_param SCRIPT_FILENAME {{ mediawiki_current_path }}/$1;
+        fastcgi_param PATH_INFO "";
+        fastcgi_pass unix:{{ mediawiki_php_fpm_socket }};
+    }
+
+    location ~* \.(?:css|js|gif|jpe?g|png|svg|ico|webp|woff2?)$ {
+        expires 7d;
+        access_log off;
+    }
+
+    location ~ /\.(?!well-known) {
+        deny all;
+    }
+}

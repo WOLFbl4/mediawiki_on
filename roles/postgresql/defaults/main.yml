@@ -1,0 +1,9 @@
+---
+postgresql_version: "16"
+postgresql_packages:
+  - "postgresql-{{ postgresql_version }}"
+  - "postgresql-client-{{ postgresql_version }}"
+  - python3-psycopg2
+
+postgresql_unix_socket: /var/run/postgresql
+

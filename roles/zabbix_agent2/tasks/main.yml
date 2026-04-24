@@ -1,0 +1,71 @@
+---
+- name: Gather installed package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Remove legacy zabbix-agent package if present
+  ansible.builtin.apt:
+    name: zabbix-agent
+    state: absent
+    purge: true
+    autoremove: true
+  when: "'zabbix-agent' in ansible_facts.packages"
+
+- name: Install packages required for Zabbix repository setup
+  ansible.builtin.apt:
+    name:
+      - gpg
+    state: present
+    update_cache: true
+
+- name: Download Zabbix repository key
+  ansible.builtin.get_url:
+    url: "{{ zabbix_release_key_url }}"
+    dest: /tmp/zabbix-official-repo.key
+    mode: "0644"
+
+- name: Install Zabbix repository keyring
+  ansible.builtin.command:
+    argv:
+      - gpg
+      - --dearmor
+      - --yes
+      - --output
+      - "{{ zabbix_release_keyring_path }}"
+      - /tmp/zabbix-official-repo.key
+  args:
+    creates: "{{ zabbix_release_keyring_path }}"
+
+- name: Configure Zabbix official APT repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by={{ zabbix_release_keyring_path }}] {{ zabbix_repo_url }} {{ zabbix_repo_distribution }} {{ zabbix_repo_component }}"
+    state: present
+    filename: zabbix
+
+- name: Install zabbix-agent2
+  ansible.builtin.apt:
+    name: "{{ zabbix_agent_package }}"
+    state: present
+    update_cache: true
+
+- name: Ensure Include directive exists in zabbix_agent2.conf
+  ansible.builtin.lineinfile:
+    path: /etc/zabbix/zabbix_agent2.conf
+    regexp: '^Include='
+    line: 'Include=/etc/zabbix/zabbix_agent2.d/*.conf'
+  notify: Restart zabbix-agent2
+
+- name: Install zabbix-agent2 custom configuration
+  ansible.builtin.template:
+    src: zabbix_agent2.custom.conf.j2
+    dest: /etc/zabbix/zabbix_agent2.d/99-custom.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart zabbix-agent2
+
+- name: Ensure zabbix-agent2 service is running
+  ansible.builtin.service:
+    name: zabbix-agent2
+    state: started
+    enabled: true

@@ -1,0 +1,4 @@
+---
+vault_mediawiki_admin_password: "change_me_admin_password"
+vault_mediawiki_db_password: "change_me_database_password"
+

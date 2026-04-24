@@ -1,0 +1,30 @@
+---
+- name: Deploy MediaWiki with PostgreSQL 16 on Ubuntu 24.04
+  hosts: mediawiki
+  become: true
+
+  pre_tasks:
+    - name: Validate required secrets
+      ansible.builtin.assert:
+        that:
+          - mediawiki_admin_password is defined
+          - mediawiki_db_password is defined
+          - mediawiki_admin_password | length > 0
+          - mediawiki_db_password | length > 0
+        fail_msg: >-
+          Define secrets in group_vars/mediawiki/vault.yml based on
+          group_vars/mediawiki/vault.yml.example.
+
+    - name: Validate DarkMode compatibility with MediaWiki branch
+      ansible.builtin.assert:
+        that:
+          - mediawiki_version is regex('^1\\.45(\\.|$)')
+        fail_msg: >-
+          The configured DarkMode tarball is from REL1_45 and requires
+          MediaWiki 1.45.x. Update mediawiki_version or disable DarkMode.
+      when: mediawiki_darkmode_enabled
+
+  roles:
+    - role: postgresql
+    - role: mediawiki
+    - role: zabbix_agent2

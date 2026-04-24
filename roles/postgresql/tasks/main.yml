@@ -1,0 +1,39 @@
+---
+- name: Install PostgreSQL packages
+  ansible.builtin.apt:
+    name: "{{ postgresql_packages }}"
+    state: present
+    update_cache: true
+
+- name: Ensure PostgreSQL service is running
+  ansible.builtin.service:
+    name: postgresql
+    state: started
+    enabled: true
+
+- name: Create MediaWiki PostgreSQL user
+  community.postgresql.postgresql_user:
+    name: "{{ mediawiki_db_user }}"
+    password: "{{ mediawiki_db_password }}"
+    role_attr_flags: "NOSUPERUSER,NOCREATEDB,NOCREATEROLE,LOGIN"
+    login_unix_socket: "{{ postgresql_unix_socket }}"
+  become_user: postgres
+  no_log: true
+
+- name: Create MediaWiki PostgreSQL database
+  community.postgresql.postgresql_db:
+    name: "{{ mediawiki_db_name }}"
+    owner: "{{ mediawiki_db_user }}"
+    encoding: "UTF8"
+    template: "template0"
+    login_unix_socket: "{{ postgresql_unix_socket }}"
+  become_user: postgres
+
+- name: Create MediaWiki PostgreSQL schema
+  community.postgresql.postgresql_schema:
+    db: "{{ mediawiki_db_name }}"
+    name: "{{ mediawiki_db_schema }}"
+    owner: "{{ mediawiki_db_user }}"
+    login_unix_socket: "{{ postgresql_unix_socket }}"
+  become_user: postgres
+

@@ -1,0 +1,223 @@
+---
+- name: Gather installed package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Gather service facts
+  ansible.builtin.service_facts:
+
+- name: Stop and disable Apache if present
+  ansible.builtin.service:
+    name: apache2
+    state: stopped
+    enabled: false
+  when:
+    - mediawiki_remove_apache
+    - "'apache2' in ansible_facts.packages"
+    - "'apache2.service' in ansible_facts.services"
+
+- name: Remove Apache packages if present
+  ansible.builtin.apt:
+    name: "{{ mediawiki_apache_packages_to_remove }}"
+    state: absent
+    purge: true
+    autoremove: true
+  when:
+    - mediawiki_remove_apache
+    - "'apache2' in ansible_facts.packages"
+
+- name: Install Nginx and PHP packages
+  ansible.builtin.apt:
+    name: "{{ mediawiki_nginx_packages }}"
+    state: present
+    update_cache: true
+
+- name: Create MediaWiki directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ mediawiki_install_root }}"
+    - "{{ mediawiki_install_root }}/releases"
+    - "{{ mediawiki_shared_path }}"
+
+- name: Create SSL directory for self-signed certificates
+  ansible.builtin.file:
+    path: "{{ mediawiki_ssl_cert_path | dirname }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  when: mediawiki_ssl_mode == "selfsigned"
+
+- name: Validate provided SSL certificate paths
+  ansible.builtin.assert:
+    that:
+      - mediawiki_ssl_cert_path | length > 0
+      - mediawiki_ssl_key_path | length > 0
+    fail_msg: Set mediawiki_ssl_cert_path and mediawiki_ssl_key_path when mediawiki_ssl_mode=provided.
+  when: mediawiki_ssl_mode == "provided"
+
+- name: Generate self-signed SSL certificate
+  ansible.builtin.command:
+    argv:
+      - openssl
+      - req
+      - -x509
+      - -nodes
+      - -newkey
+      - rsa:4096
+      - -keyout
+      - "{{ mediawiki_ssl_key_path }}"
+      - -out
+      - "{{ mediawiki_ssl_cert_path }}"
+      - -days
+      - "{{ mediawiki_ssl_selfsigned_days | string }}"
+      - -subj
+      - "/CN={{ mediawiki_server_name }}"
+      - -addext
+      - "subjectAltName={{ mediawiki_ssl_subject_alt_name }}"
+  args:
+    creates: "{{ mediawiki_ssl_cert_path }}"
+  when: mediawiki_ssl_mode == "selfsigned"
+
+- name: Ensure SSL private key permissions
+  ansible.builtin.file:
+    path: "{{ mediawiki_ssl_key_path }}"
+    owner: root
+    group: root
+    mode: "0600"
+  when: mediawiki_ssl_mode == "selfsigned"
+
+- name: Download MediaWiki archive
+  ansible.builtin.get_url:
+    url: "{{ mediawiki_archive_url }}"
+    dest: "/tmp/mediawiki-{{ mediawiki_version }}.tar.gz"
+    mode: "0644"
+    checksum: "{{ mediawiki_archive_checksum if mediawiki_archive_checksum else omit }}"
+
+- name: Unpack MediaWiki release
+  ansible.builtin.unarchive:
+    src: "/tmp/mediawiki-{{ mediawiki_version }}.tar.gz"
+    dest: "{{ mediawiki_install_root }}/releases"
+    remote_src: true
+    creates: "{{ mediawiki_release_path }}/index.php"
+
+- name: Point current symlink to active MediaWiki release
+  ansible.builtin.file:
+    src: "{{ mediawiki_release_path }}"
+    dest: "{{ mediawiki_current_path }}"
+    state: link
+    force: true
+
+- name: Ensure MediaWiki upload directory is writable by Nginx and PHP-FPM
+  ansible.builtin.file:
+    path: "{{ mediawiki_current_path }}/images"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: "0755"
+
+- name: Check whether MediaWiki is already configured
+  ansible.builtin.stat:
+    path: "{{ mediawiki_shared_path }}/LocalSettings.php"
+  register: mediawiki_localsettings
+
+- name: Run MediaWiki CLI installer
+  ansible.builtin.command:
+    argv:
+      - php
+      - maintenance/run.php
+      - install
+      - "--confpath={{ mediawiki_shared_path }}"
+      - "--dbtype=postgres"
+      - "--dbserver={{ mediawiki_db_host }}"
+      - "--dbport={{ mediawiki_db_port }}"
+      - "--dbschema={{ mediawiki_db_schema }}"
+      - "--dbname={{ mediawiki_db_name }}"
+      - "--dbuser={{ mediawiki_db_user }}"
+      - "--dbpass={{ mediawiki_db_password }}"
+      - "--server={{ mediawiki_server_url }}"
+      - "--scriptpath={{ mediawiki_script_path }}"
+      - "--lang={{ mediawiki_site_language }}"
+      - "--pass={{ mediawiki_admin_password }}"
+      - "{{ mediawiki_wiki_name }}"
+      - "{{ mediawiki_admin_user }}"
+  args:
+    chdir: "{{ mediawiki_current_path }}"
+    creates: "{{ mediawiki_shared_path }}/LocalSettings.php"
+  when: not mediawiki_localsettings.stat.exists
+  no_log: true
+
+- name: Link LocalSettings.php into current release
+  ansible.builtin.file:
+    src: "{{ mediawiki_shared_path }}/LocalSettings.php"
+    dest: "{{ mediawiki_current_path }}/LocalSettings.php"
+    state: link
+    force: true
+
+- name: Download DarkMode extension archive
+  ansible.builtin.get_url:
+    url: "{{ mediawiki_darkmode_archive_url }}"
+    dest: "{{ mediawiki_darkmode_archive_path }}"
+    mode: "0644"
+  when: mediawiki_darkmode_enabled
+
+- name: Install DarkMode extension
+  ansible.builtin.unarchive:
+    src: "{{ mediawiki_darkmode_archive_path }}"
+    dest: "{{ mediawiki_current_path }}/extensions"
+    remote_src: true
+    creates: "{{ mediawiki_darkmode_extension_path }}/extension.json"
+  when: mediawiki_darkmode_enabled
+
+- name: Enable DarkMode extension in LocalSettings.php
+  ansible.builtin.lineinfile:
+    path: "{{ mediawiki_shared_path }}/LocalSettings.php"
+    regexp: "^wfLoadExtension\\( 'DarkMode' \\);$"
+    line: "{{ mediawiki_darkmode_loader_line }}"
+    insertafter: EOF
+  when: mediawiki_darkmode_enabled
+
+- name: Install Nginx virtual host
+  ansible.builtin.template:
+    src: mediawiki.conf.j2
+    dest: "/etc/nginx/sites-available/{{ mediawiki_nginx_site_name }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Reload nginx
+
+- name: Remove default Nginx site
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: Reload nginx
+
+- name: Enable MediaWiki Nginx site
+  ansible.builtin.file:
+    src: "/etc/nginx/sites-available/{{ mediawiki_nginx_site_name }}"
+    dest: "/etc/nginx/sites-enabled/{{ mediawiki_nginx_site_name }}"
+    state: link
+    force: true
+  notify: Reload nginx
+
+- name: Check Nginx configuration
+  ansible.builtin.command:
+    argv:
+      - nginx
+      - -t
+  changed_when: false
+
+- name: Ensure php-fpm is running
+  ansible.builtin.service:
+    name: "{{ mediawiki_php_fpm_service }}"
+    state: started
+    enabled: true
+
+- name: Ensure Nginx is running
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true

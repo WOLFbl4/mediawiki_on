@@ -1,0 +1,64 @@
+---
+mediawiki_version: "1.45.3"
+mediawiki_version_branch: "{{ mediawiki_version.split('.')[0] }}.{{ mediawiki_version.split('.')[1] }}"
+mediawiki_archive_url: "https://releases.wikimedia.org/mediawiki/{{ mediawiki_version_branch }}/mediawiki-{{ mediawiki_version }}.tar.gz"
+mediawiki_archive_checksum: ""
+
+mediawiki_install_root: /opt/mediawiki
+mediawiki_release_path: "{{ mediawiki_install_root }}/releases/mediawiki-{{ mediawiki_version }}"
+mediawiki_current_path: "{{ mediawiki_install_root }}/current"
+mediawiki_shared_path: "{{ mediawiki_install_root }}/shared"
+
+mediawiki_server_name: wiki.example.com
+mediawiki_server_url: "https://{{ mediawiki_server_name }}"
+mediawiki_script_path: /wiki
+mediawiki_site_language: ru
+mediawiki_wiki_name: MediaWiki
+mediawiki_admin_user: admin
+
+mediawiki_db_name: mediawiki
+mediawiki_db_user: mediawiki
+mediawiki_db_schema: mediawiki
+mediawiki_db_host: localhost
+mediawiki_db_port: 5432
+
+mediawiki_remove_apache: true
+mediawiki_apache_packages_to_remove:
+  - apache2
+  - apache2-bin
+  - apache2-data
+  - apache2-utils
+  - libapache2-mod-php
+
+mediawiki_nginx_site_name: mediawiki.conf
+mediawiki_php_version: "8.3"
+mediawiki_php_fpm_service: "php{{ mediawiki_php_version }}-fpm"
+mediawiki_php_fpm_socket: "/run/php/php{{ mediawiki_php_version }}-fpm.sock"
+mediawiki_ssl_mode: selfsigned
+mediawiki_ssl_cert_path: "/etc/ssl/mediawiki/{{ mediawiki_server_name }}.crt"
+mediawiki_ssl_key_path: "/etc/ssl/mediawiki/{{ mediawiki_server_name }}.key"
+mediawiki_ssl_selfsigned_days: 3650
+mediawiki_ssl_subject_alt_name: "DNS:{{ mediawiki_server_name }}"
+mediawiki_darkmode_enabled: true
+mediawiki_darkmode_name: "DarkMode"
+mediawiki_darkmode_archive_url: "https://extdist.wmflabs.org/dist/extensions/DarkMode-REL1_45-ee4e10a.tar.gz"
+mediawiki_darkmode_archive_path: "/tmp/{{ mediawiki_darkmode_name }}.tar.gz"
+mediawiki_darkmode_extension_path: "{{ mediawiki_current_path }}/extensions/{{ mediawiki_darkmode_name }}"
+mediawiki_darkmode_loader_line: "wfLoadExtension( 'DarkMode' );"
+
+mediawiki_nginx_packages:
+  - nginx
+  - openssl
+  - php
+  - php-fpm
+  - php-apcu
+  - php-cli
+  - php-common
+  - php-curl
+  - php-gd
+  - php-intl
+  - php-mbstring
+  - php-pgsql
+  - php-xml
+  - php-zip
+  - tar

@@ -1,0 +1,14 @@
+---
+zabbix_version: "7.4"
+zabbix_agent_server: "127.0.0.1"
+zabbix_agent_server_active: "{{ zabbix_agent_server }}"
+zabbix_agent_hostname: "{{ inventory_hostname }}"
+zabbix_agent_metadata: ""
+zabbix_agent_listen_port: 10050
+zabbix_agent_package: zabbix-agent2
+zabbix_release_key_url: "https://repo.zabbix.com/zabbix-official-repo.key"
+zabbix_release_keyring_path: /usr/share/keyrings/zabbix-official-repo.gpg
+zabbix_repo_url: "https://repo.zabbix.com/zabbix/{{ zabbix_version }}/stable/ubuntu"
+zabbix_repo_distribution: noble
+zabbix_repo_component: main
+
