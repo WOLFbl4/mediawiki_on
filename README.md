@@ -26,7 +26,7 @@ What this project does:
 
 ## Preparation
 
-1. Make sure `Ansible` is installed on the control machine.
+1. Make sure `Ansible` is installed on the control machine. If it is not installed yet, use [install_ansible.sh](install_ansible.sh).
 
 2. Install the required collection:
 
