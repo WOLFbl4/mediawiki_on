@@ -30,6 +30,22 @@ mediawiki_sidebar_enabled: true
 mediawiki_sidebar_page: "MediaWiki:Sidebar"
 mediawiki_sidebar_summary: "Configure sidebar from Ansible"
 mediawiki_sidebar_editor: "Maintenance script"
+mediawiki_content_import_enabled: false
+mediawiki_content_import_repo: ""
+mediawiki_content_import_version: "main"
+mediawiki_content_import_checkout_path: "{{ mediawiki_shared_path }}/content-import"
+mediawiki_content_import_subdir: ""
+mediawiki_content_import_source_path: >-
+  {{ mediawiki_content_import_checkout_path
+     ~ (('/' ~ mediawiki_content_import_subdir) if (mediawiki_content_import_subdir | length > 0) else '') }}
+mediawiki_content_import_patterns:
+  - "*.mediawiki"
+  - "*.wiki"
+  - "*.wikitext"
+  - "*.txt"
+mediawiki_content_import_title_prefix: ""
+mediawiki_content_import_editor: "Maintenance script"
+mediawiki_content_import_summary: "Import page from Git repository"
 
 mediawiki_db_name: mediawiki
 mediawiki_db_user: mediawiki

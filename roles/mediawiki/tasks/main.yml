@@ -288,6 +288,79 @@
     - mediawiki_sidebar_enabled
     - mediawiki_sidebar_current.stdout != (mediawiki_sidebar_desired.content | b64decode)
 
+- name: Validate MediaWiki content import settings
+  ansible.builtin.assert:
+    that:
+      - mediawiki_content_import_repo | length > 0
+      - mediawiki_content_import_source_path | length > 0
+    fail_msg: Set mediawiki_content_import_repo and mediawiki_content_import_source_path when content import is enabled.
+  when: mediawiki_content_import_enabled
+
+- name: Clone MediaWiki content import repository
+  ansible.builtin.git:
+    repo: "{{ mediawiki_content_import_repo }}"
+    dest: "{{ mediawiki_content_import_checkout_path }}"
+    version: "{{ mediawiki_content_import_version }}"
+    force: true
+  when: mediawiki_content_import_enabled
+
+- name: Validate MediaWiki content import source directory
+  ansible.builtin.stat:
+    path: "{{ mediawiki_content_import_source_path }}"
+  register: mediawiki_content_import_source
+  when: mediawiki_content_import_enabled
+
+- name: Fail if MediaWiki content import source directory is missing
+  ansible.builtin.assert:
+    that:
+      - mediawiki_content_import_source.stat.exists | default(false)
+      - mediawiki_content_import_source.stat.isdir | default(false)
+    fail_msg: "Content import source directory does not exist: {{ mediawiki_content_import_source_path }}"
+  when: mediawiki_content_import_enabled
+
+- name: Find MediaWiki content files to import
+  ansible.builtin.find:
+    paths: "{{ mediawiki_content_import_source_path }}"
+    patterns: "{{ mediawiki_content_import_patterns }}"
+    file_type: file
+    recurse: true
+  register: mediawiki_content_import_files
+  when: mediawiki_content_import_enabled
+
+- name: Import content files as MediaWiki pages
+  ansible.builtin.shell: |
+    set -euo pipefail
+
+    prefix="${CONTENT_ROOT%/}/"
+    rel="${CONTENT_FILE#"$prefix"}"
+    title="${rel%.*}"
+    title="${title//\//:}"
+    title="${title//_/ }"
+    title="${TITLE_PREFIX}${title}"
+
+    current="$(php maintenance/run.php getText "$title" 2>/dev/null || true)"
+    desired="$(cat "$CONTENT_FILE")"
+
+    if [ "$current" = "$desired" ]; then
+      exit 0
+    fi
+
+    php maintenance/run.php edit -u "$CONTENT_EDITOR" -s "$CONTENT_SUMMARY" "$title" < "$CONTENT_FILE"
+    echo "changed"
+  args:
+    chdir: "{{ mediawiki_current_path }}"
+    executable: /bin/bash
+  environment:
+    CONTENT_FILE: "{{ item.path }}"
+    CONTENT_ROOT: "{{ mediawiki_content_import_source_path }}"
+    CONTENT_EDITOR: "{{ mediawiki_content_import_editor }}"
+    CONTENT_SUMMARY: "{{ mediawiki_content_import_summary }}"
+    TITLE_PREFIX: "{{ mediawiki_content_import_title_prefix }}"
+  loop: "{{ mediawiki_content_import_files.files | default([]) | sort(attribute='path') }}"
+  changed_when: "'changed' in mediawiki_content_import_result.stdout"
+  register: mediawiki_content_import_result
+  when: mediawiki_content_import_enabled
+
 - name: Check whether DarkMode extension is installed
   ansible.builtin.stat:
     path: "{{ mediawiki_darkmode_extension_path }}/extension.json"
