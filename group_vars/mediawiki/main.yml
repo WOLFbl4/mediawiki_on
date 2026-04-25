@@ -11,7 +11,7 @@ mediawiki_admin_user: "wikiadmin"
 mediawiki_ssl_mode: "selfsigned"
 mediawiki_ssl_subject_alt_name: "IP:10.10.50.46"
 mediawiki_darkmode_enabled: true
-mediawiki_darkmode_archive_url: "https://extdist.wmflabs.org/dist/extensions/DarkMode-REL1_45-475a03b.tar.gz"
+mediawiki_darkmode_archive_url: ""
 
 mediawiki_db_name: "mediawiki"
 mediawiki_db_user: "mediawiki"

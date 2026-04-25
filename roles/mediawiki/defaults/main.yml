@@ -41,9 +41,13 @@ mediawiki_ssl_selfsigned_days: 3650
 mediawiki_ssl_subject_alt_name: "DNS:{{ mediawiki_server_name }}"
 mediawiki_darkmode_enabled: true
 mediawiki_darkmode_name: "DarkMode"
-mediawiki_darkmode_archive_url: "https://extdist.wmflabs.org/dist/extensions/DarkMode-REL1_45-ee4e10a.tar.gz"
+mediawiki_darkmode_release_branch: "REL{{ mediawiki_version_branch | replace('.', '_') }}"
+mediawiki_darkmode_index_url: "https://extdist.wmflabs.org/dist/extensions/"
+mediawiki_darkmode_archive_url: ""
 mediawiki_darkmode_archive_path: "/tmp/{{ mediawiki_darkmode_name }}.tar.gz"
 mediawiki_darkmode_extension_path: "{{ mediawiki_current_path }}/extensions/{{ mediawiki_darkmode_name }}"
+mediawiki_darkmode_git_repo: "https://gerrit.wikimedia.org/r/mediawiki/extensions/DarkMode"
+mediawiki_darkmode_git_version: "{{ mediawiki_darkmode_release_branch }}"
 mediawiki_darkmode_loader_line: "wfLoadExtension( 'DarkMode' );"
 
 mediawiki_nginx_packages:

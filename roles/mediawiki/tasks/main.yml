@@ -157,20 +157,85 @@
     state: link
     force: true
 
-- name: Download DarkMode extension archive
-  ansible.builtin.get_url:
-    url: "{{ mediawiki_darkmode_archive_url }}"
-    dest: "{{ mediawiki_darkmode_archive_path }}"
-    mode: "0644"
+- name: Check whether DarkMode extension is installed
+  ansible.builtin.stat:
+    path: "{{ mediawiki_darkmode_extension_path }}/extension.json"
+  register: mediawiki_darkmode_installed
   when: mediawiki_darkmode_enabled
 
+- name: Discover current DarkMode extension archive
+  ansible.builtin.uri:
+    url: "{{ mediawiki_darkmode_index_url }}"
+    return_content: true
+  register: mediawiki_darkmode_index
+  when:
+    - mediawiki_darkmode_enabled
+    - not mediawiki_darkmode_installed.stat.exists
+    - mediawiki_darkmode_archive_url | length == 0
+
+- name: Set discovered DarkMode extension archive URL
+  ansible.builtin.set_fact:
+    mediawiki_darkmode_resolved_archive_url: >-
+      {{ mediawiki_darkmode_index_url
+         ~ (mediawiki_darkmode_index.content
+            | regex_search('DarkMode-' ~ mediawiki_darkmode_release_branch ~ '-[0-9a-f]+\\.tar\\.gz')) }}
+  when:
+    - mediawiki_darkmode_enabled
+    - not mediawiki_darkmode_installed.stat.exists
+    - mediawiki_darkmode_archive_url | length == 0
+
+- name: Use configured DarkMode extension archive URL
+  ansible.builtin.set_fact:
+    mediawiki_darkmode_resolved_archive_url: "{{ mediawiki_darkmode_archive_url }}"
+  when:
+    - mediawiki_darkmode_enabled
+    - not mediawiki_darkmode_installed.stat.exists
+    - mediawiki_darkmode_archive_url | length > 0
+
+- name: Validate DarkMode extension archive URL
+  ansible.builtin.assert:
+    that:
+      - mediawiki_darkmode_resolved_archive_url is defined
+      - mediawiki_darkmode_resolved_archive_url is match('^https?://.+DarkMode-.+\\.tar\\.gz$')
+    fail_msg: >-
+      Could not discover a DarkMode archive for {{ mediawiki_darkmode_release_branch }}.
+      Set mediawiki_darkmode_archive_url manually or disable DarkMode.
+  when:
+    - mediawiki_darkmode_enabled
+    - not mediawiki_darkmode_installed.stat.exists
+
 - name: Install DarkMode extension
-  ansible.builtin.unarchive:
-    src: "{{ mediawiki_darkmode_archive_path }}"
-    dest: "{{ mediawiki_current_path }}/extensions"
-    remote_src: true
-    creates: "{{ mediawiki_darkmode_extension_path }}/extension.json"
-  when: mediawiki_darkmode_enabled
+  when:
+    - mediawiki_darkmode_enabled
+    - not mediawiki_darkmode_installed.stat.exists
+  block:
+    - name: Download DarkMode extension archive
+      ansible.builtin.get_url:
+        url: "{{ mediawiki_darkmode_resolved_archive_url }}"
+        dest: "{{ mediawiki_darkmode_archive_path }}"
+        mode: "0644"
+        force: true
+
+    - name: Unpack DarkMode extension archive
+      ansible.builtin.unarchive:
+        src: "{{ mediawiki_darkmode_archive_path }}"
+        dest: "{{ mediawiki_current_path }}/extensions"
+        remote_src: true
+        creates: "{{ mediawiki_darkmode_extension_path }}/extension.json"
+
+  rescue:
+    - name: Install git for DarkMode fallback
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: true
+
+    - name: Clone DarkMode extension from Gerrit fallback
+      ansible.builtin.git:
+        repo: "{{ mediawiki_darkmode_git_repo }}"
+        dest: "{{ mediawiki_darkmode_extension_path }}"
+        version: "{{ mediawiki_darkmode_git_version }}"
+        force: true
 
 - name: Enable DarkMode extension in LocalSettings.php
   ansible.builtin.lineinfile:

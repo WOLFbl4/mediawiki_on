@@ -96,7 +96,7 @@ https://<your-domain-or-ip>/wiki
 
 - MediaWiki version: `mediawiki_version`
 - MediaWiki archive URL: `mediawiki_archive_url`
-- DarkMode extension archive URL: `mediawiki_darkmode_archive_url`
+- DarkMode extension archive URL: `mediawiki_darkmode_archive_url`; leave it empty to auto-discover the current `REL1_45` archive from extdist
 - Publish path: `mediawiki_script_path`
 - Database name, user, and schema: `mediawiki_db_*`
 - PostgreSQL version: `postgresql_version`

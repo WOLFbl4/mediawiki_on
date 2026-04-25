@@ -96,7 +96,7 @@ https://<your-domain-or-ip>/wiki
 
 - Версия MediaWiki: `mediawiki_version`
 - URL архива MediaWiki: `mediawiki_archive_url`
-- URL архива расширения DarkMode: `mediawiki_darkmode_archive_url`
+- URL архива расширения DarkMode: `mediawiki_darkmode_archive_url`; оставьте пустым, чтобы автоматически найти текущий архив `REL1_45` на extdist
 - Путь публикации: `mediawiki_script_path`
 - Имя базы данных, пользователь и схема: `mediawiki_db_*`
 - Версия PostgreSQL: `postgresql_version`
