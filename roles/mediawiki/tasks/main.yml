@@ -211,6 +211,33 @@
       $wgDefaultUserOptions['vector-theme'] = '{{ mediawiki_vector_theme_default }}';
   when: mediawiki_vector_dark_mode_enabled
 
+- name: Configure Vector 2022 full-width pages
+  ansible.builtin.blockinfile:
+    path: "{{ mediawiki_shared_path }}/LocalSettings.php"
+    marker: "# {mark} ANSIBLE MANAGED VECTOR FULL WIDTH"
+    block: |
+      $wgDefaultUserOptions['vector-limited-width'] = 0;
+      $wgVectorMaxWidthOptions['exclude']['namespaces'] = [
+          NS_MAIN,
+          NS_TALK,
+          NS_USER,
+          NS_USER_TALK,
+          NS_PROJECT,
+          NS_PROJECT_TALK,
+          NS_FILE,
+          NS_FILE_TALK,
+          NS_MEDIAWIKI,
+          NS_MEDIAWIKI_TALK,
+          NS_TEMPLATE,
+          NS_TEMPLATE_TALK,
+          NS_HELP,
+          NS_HELP_TALK,
+          NS_CATEGORY,
+          NS_CATEGORY_TALK,
+          NS_SPECIAL,
+      ];
+  when: mediawiki_vector_full_width_enabled
+
 - name: Update existing users to the configured Vector theme
   ansible.builtin.command:
     argv:
@@ -230,6 +257,27 @@
   changed_when: false
   when:
     - mediawiki_vector_dark_mode_enabled
+    - mediawiki_vector_update_existing_users
+
+- name: Update existing users to Vector full width
+  ansible.builtin.command:
+    argv:
+      - php
+      - maintenance/run.php
+      - userOptions
+      - vector-limited-width
+      - --nowarn
+      - --quiet
+      - --old
+      - "{{ item }}"
+      - --new
+      - "0"
+  args:
+    chdir: "{{ mediawiki_current_path }}"
+  loop: "{{ mediawiki_vector_limited_width_old_values }}"
+  changed_when: false
+  when:
+    - mediawiki_vector_full_width_enabled
     - mediawiki_vector_update_existing_users
 
 - name: Check installed MediaWiki extensions

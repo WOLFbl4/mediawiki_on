@@ -24,11 +24,14 @@ mediawiki_admin_user: admin
 mediawiki_default_skin: "vector-2022"
 mediawiki_vector_dark_mode_enabled: true
 mediawiki_vector_theme_default: "night"
+mediawiki_vector_full_width_enabled: true
 mediawiki_vector_update_existing_users: true
 mediawiki_vector_theme_old_values:
   - day
   - os
   - ""
+mediawiki_vector_limited_width_old_values:
+  - "1"
 mediawiki_sidebar_enabled: true
 mediawiki_sidebar_page: "MediaWiki:Sidebar"
 mediawiki_sidebar_summary: "Configure sidebar from Ansible"
