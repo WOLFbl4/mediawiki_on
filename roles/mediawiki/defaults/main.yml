@@ -8,6 +8,8 @@ mediawiki_install_root: /opt/mediawiki
 mediawiki_release_path: "{{ mediawiki_install_root }}/releases/mediawiki-{{ mediawiki_version }}"
 mediawiki_current_path: "{{ mediawiki_install_root }}/current"
 mediawiki_shared_path: "{{ mediawiki_install_root }}/shared"
+mediawiki_web_root: /var/www/html
+mediawiki_web_path: "{{ mediawiki_web_root }}{{ mediawiki_script_path }}"
 
 mediawiki_server_name: wiki.example.com
 mediawiki_server_url: "https://{{ mediawiki_server_name }}"

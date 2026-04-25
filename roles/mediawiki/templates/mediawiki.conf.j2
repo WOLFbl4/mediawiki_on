@@ -18,6 +18,7 @@ server {
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_prefer_server_ciphers off;
 
+    root {{ mediawiki_web_root }};
     client_max_body_size 100m;
     index index.php;
 
@@ -38,15 +39,13 @@ server {
     }
 
     location {{ mediawiki_script_path }}/ {
-        root {{ mediawiki_current_path | dirname }};
         index index.php;
-        rewrite ^{{ mediawiki_script_path | regex_escape }}/(.*)$ /current/$1 break;
-        try_files $uri $uri/ /current/index.php?$args;
+        try_files $uri $uri/ {{ mediawiki_script_path }}/index.php?$args;
     }
 
     location ~ ^{{ mediawiki_script_path | regex_escape }}/(.+\.php)$ {
         include snippets/fastcgi-php.conf;
-        fastcgi_param SCRIPT_FILENAME {{ mediawiki_current_path }}/$1;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_param PATH_INFO "";
         fastcgi_pass unix:{{ mediawiki_php_fpm_socket }};
     }

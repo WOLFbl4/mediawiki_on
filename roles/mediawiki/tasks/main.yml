@@ -111,6 +111,21 @@
     state: link
     force: true
 
+- name: Ensure web root exists
+  ansible.builtin.file:
+    path: "{{ mediawiki_web_root }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Link MediaWiki into web root
+  ansible.builtin.file:
+    src: "{{ mediawiki_current_path }}"
+    dest: "{{ mediawiki_web_path }}"
+    state: link
+    force: true
+
 - name: Ensure MediaWiki upload directory is writable by Nginx and PHP-FPM
   ansible.builtin.file:
     path: "{{ mediawiki_current_path }}/images"
