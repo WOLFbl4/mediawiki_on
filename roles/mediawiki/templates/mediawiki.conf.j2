@@ -51,11 +51,6 @@ server {
         fastcgi_pass unix:{{ mediawiki_php_fpm_socket }};
     }
 
-    location ~* \.(?:css|js|gif|jpe?g|png|svg|ico|webp|woff2?)$ {
-        expires 7d;
-        access_log off;
-    }
-
     location ~ /\.(?!well-known) {
         deny all;
     }
