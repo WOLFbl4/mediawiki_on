@@ -44,17 +44,20 @@ fi
 
 log "Installing OS dependencies"
 sudo apt update
-sudo apt install -y python3-pip python3-venv
+sudo apt install -y python3-pip python3-venv python3-full
 
 log "Recreating Python virtual environment at ${VENV_DIR}"
 rm -rf "${VENV_DIR}"
 python3 -m venv "${VENV_DIR}"
 
 log "Upgrading pip inside the virtual environment"
-"${VENV_DIR}/bin/python" -m pip install --upgrade pip
+"${VENV_DIR}/bin/python" -m pip install --upgrade pip setuptools wheel
 
-log "Installing Ansible inside the virtual environment"
-"${VENV_DIR}/bin/pip" install ansible
+log "Installing Ansible and VMware-related Python packages inside the virtual environment"
+"${VENV_DIR}/bin/pip" install ansible pyvmomi requests
+
+log "Installing VMware Ansible collection"
+"${VENV_DIR}/bin/ansible-galaxy" collection install --upgrade community.vmware
 
 log "Adding virtual environment activation to ~/.bashrc if needed"
 append_if_missing "${ACTIVATE_LINE}" "${HOME}/.bashrc"
@@ -64,4 +67,4 @@ log "Checking installed Ansible version"
 "${VENV_DIR}/bin/ansible" --version
 
 log "Installation completed"
-log "Run: source \"${VENV_DIR}/bin/activate\""
+log "Reconnect to the shell or run: source \"${VENV_DIR}/bin/activate\""
