@@ -180,6 +180,19 @@
       $wgArticlePath = "{{ mediawiki_article_path }}";
       $wgUsePathInfo = true;
 
+- name: Configure Vector 2022 native dark mode
+  ansible.builtin.blockinfile:
+    path: "{{ mediawiki_shared_path }}/LocalSettings.php"
+    marker: "# {mark} ANSIBLE MANAGED VECTOR DARK MODE"
+    block: |
+      wfLoadSkin( 'Vector' );
+      $wgDefaultSkin = '{{ mediawiki_default_skin }}';
+      $wgVectorNightMode['beta'] = true;
+      $wgVectorNightMode['logged_out'] = true;
+      $wgVectorNightMode['logged_in'] = true;
+      $wgDefaultUserOptions['vector-theme'] = '{{ mediawiki_vector_theme_default }}';
+  when: mediawiki_vector_dark_mode_enabled
+
 - name: Check installed MediaWiki extensions
   ansible.builtin.stat:
     path: "{{ mediawiki_current_path }}/extensions/{{ item.name }}/extension.json"
@@ -335,11 +348,14 @@
         force: true
 
 - name: Enable DarkMode extension in LocalSettings.php
-  ansible.builtin.lineinfile:
+  ansible.builtin.blockinfile:
     path: "{{ mediawiki_shared_path }}/LocalSettings.php"
-    regexp: "^wfLoadExtension\\( 'DarkMode' \\);$"
-    line: "{{ mediawiki_darkmode_loader_line }}"
-    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED DARKMODE EXTENSION"
+    block: |
+      {{ mediawiki_darkmode_loader_line }}
+      {% for config_line in mediawiki_darkmode_config_lines %}
+      {{ config_line }}
+      {% endfor %}
   when: mediawiki_darkmode_enabled
 
 - name: Install Nginx virtual host

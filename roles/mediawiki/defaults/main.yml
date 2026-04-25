@@ -18,6 +18,9 @@ mediawiki_article_path: "{{ mediawiki_script_path }}/$1"
 mediawiki_site_language: ru
 mediawiki_wiki_name: MediaWiki
 mediawiki_admin_user: admin
+mediawiki_default_skin: "vector-2022"
+mediawiki_vector_dark_mode_enabled: true
+mediawiki_vector_theme_default: "os"
 mediawiki_sidebar_enabled: true
 mediawiki_sidebar_page: "MediaWiki:Sidebar"
 mediawiki_sidebar_summary: "Configure sidebar from Ansible"
@@ -56,6 +59,8 @@ mediawiki_darkmode_extension_path: "{{ mediawiki_current_path }}/extensions/{{ m
 mediawiki_darkmode_git_repo: "https://gerrit.wikimedia.org/r/mediawiki/extensions/DarkMode"
 mediawiki_darkmode_git_version: "{{ mediawiki_darkmode_release_branch }}"
 mediawiki_darkmode_loader_line: "wfLoadExtension( 'DarkMode' );"
+mediawiki_darkmode_config_lines:
+  - "$wgDarkModeTogglePosition = 'sidebar';"
 mediawiki_extra_extensions:
   - name: Cite
     git_repo: "https://gerrit.wikimedia.org/r/mediawiki/extensions/Cite"

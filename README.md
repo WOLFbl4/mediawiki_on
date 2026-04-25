@@ -11,6 +11,7 @@ What this project does:
 - installs `Nginx`, `PHP-FPM`, and SSL for MediaWiki;
 - downloads `MediaWiki 1.45.3` from the official tarball;
 - installs the `DarkMode` extension from the provided `REL1_45` tarball;
+- enables native Vector 2022 dark mode controls;
 - enables the `Cite` and `EditAccount` extensions;
 - configures `MediaWiki:Sidebar`;
 - runs the MediaWiki CLI installer and publishes the site under `/wiki`;
@@ -59,6 +60,8 @@ all:
 - `mediawiki_site_language`
 - `mediawiki_darkmode_enabled`
 - `mediawiki_darkmode_archive_url`
+- `mediawiki_vector_dark_mode_enabled`
+- `mediawiki_vector_theme_default`
 - `mediawiki_extra_extensions`
 - `mediawiki_sidebar_enabled`
 - `zabbix_agent_server`

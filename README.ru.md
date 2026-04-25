@@ -11,6 +11,7 @@ Ansible-проект для развёртывания `MediaWiki` с `PostgreSQ
 - устанавливает `Nginx`, `PHP-FPM` и SSL для MediaWiki;
 - загружает `MediaWiki 1.45.3` из официального tarball;
 - устанавливает расширение `DarkMode` из указанного tarball `REL1_45`;
+- включает встроенный dark mode в Vector 2022;
 - включает расширения `Cite` и `EditAccount`;
 - настраивает `MediaWiki:Sidebar`;
 - выполняет CLI-установку MediaWiki и публикует сайт по пути `/wiki`;
@@ -59,6 +60,8 @@ all:
 - `mediawiki_site_language`
 - `mediawiki_darkmode_enabled`
 - `mediawiki_darkmode_archive_url`
+- `mediawiki_vector_dark_mode_enabled`
+- `mediawiki_vector_theme_default`
 - `mediawiki_extra_extensions`
 - `mediawiki_sidebar_enabled`
 - `zabbix_agent_server`
