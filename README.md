@@ -62,6 +62,7 @@ all:
 - `mediawiki_darkmode_archive_url`
 - `mediawiki_vector_dark_mode_enabled`
 - `mediawiki_vector_theme_default`
+- `mediawiki_vector_update_existing_users`
 - `mediawiki_extra_extensions`
 - `mediawiki_sidebar_enabled`
 - `zabbix_agent_server`

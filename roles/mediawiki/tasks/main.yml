@@ -193,6 +193,27 @@
       $wgDefaultUserOptions['vector-theme'] = '{{ mediawiki_vector_theme_default }}';
   when: mediawiki_vector_dark_mode_enabled
 
+- name: Update existing users to the configured Vector theme
+  ansible.builtin.command:
+    argv:
+      - php
+      - maintenance/run.php
+      - userOptions
+      - vector-theme
+      - --nowarn
+      - --quiet
+      - --old
+      - "{{ item }}"
+      - --new
+      - "{{ mediawiki_vector_theme_default }}"
+  args:
+    chdir: "{{ mediawiki_current_path }}"
+  loop: "{{ mediawiki_vector_theme_old_values }}"
+  changed_when: false
+  when:
+    - mediawiki_vector_dark_mode_enabled
+    - mediawiki_vector_update_existing_users
+
 - name: Check installed MediaWiki extensions
   ansible.builtin.stat:
     path: "{{ mediawiki_current_path }}/extensions/{{ item.name }}/extension.json"
