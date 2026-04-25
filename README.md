@@ -12,7 +12,7 @@ What this project does:
 - downloads `MediaWiki 1.45.3` from the official tarball;
 - installs the `DarkMode` extension from the provided `REL1_45` tarball;
 - enables native Vector 2022 dark mode controls;
-- enables the `Cite` and `EditAccount` extensions;
+- enables the `Cite`, `EditAccount`, and `MultimediaViewer` extensions;
 - configures `MediaWiki:Sidebar`;
 - runs the MediaWiki CLI installer and publishes the site under `/wiki`;
 - installs `zabbix-agent2` from the official Zabbix repository for `Ubuntu 24.04`.

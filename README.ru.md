@@ -12,7 +12,7 @@ Ansible-проект для развёртывания `MediaWiki` с `PostgreSQ
 - загружает `MediaWiki 1.45.3` из официального tarball;
 - устанавливает расширение `DarkMode` из указанного tarball `REL1_45`;
 - включает встроенный dark mode в Vector 2022;
-- включает расширения `Cite` и `EditAccount`;
+- включает расширения `Cite`, `EditAccount` и `MultimediaViewer`;
 - настраивает `MediaWiki:Sidebar`;
 - выполняет CLI-установку MediaWiki и публикует сайт по пути `/wiki`;
 - устанавливает `zabbix-agent2` из официального репозитория Zabbix для `Ubuntu 24.04`.
