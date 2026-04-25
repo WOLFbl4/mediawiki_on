@@ -38,13 +38,13 @@ server {
     }
 
     location {{ mediawiki_script_path }}/ {
-        alias {{ mediawiki_current_path }}/;
+        root {{ mediawiki_current_path | dirname }};
         index index.php;
-        try_files $request_filename $request_filename/ {{ mediawiki_script_path }}/index.php?$args;
+        rewrite ^{{ mediawiki_script_path | regex_escape }}/(.*)$ /current/$1 break;
+        try_files $uri $uri/ /current/index.php?$args;
     }
 
     location ~ ^{{ mediawiki_script_path | regex_escape }}/(.+\.php)$ {
-        alias {{ mediawiki_current_path }}/$1;
         include snippets/fastcgi-php.conf;
         fastcgi_param SCRIPT_FILENAME {{ mediawiki_current_path }}/$1;
         fastcgi_param PATH_INFO "";
