@@ -33,11 +33,13 @@ mediawiki_sidebar_editor: "Maintenance script"
 mediawiki_content_import_enabled: false
 mediawiki_content_import_repo: ""
 mediawiki_content_import_version: "main"
-mediawiki_content_import_checkout_path: "{{ mediawiki_shared_path }}/content-import"
+mediawiki_content_import_checkout_path: "/tmp/mediawiki-content-import"
 mediawiki_content_import_subdir: ""
 mediawiki_content_import_source_path: >-
   {{ mediawiki_content_import_checkout_path
      ~ (('/' ~ mediawiki_content_import_subdir) if (mediawiki_content_import_subdir | length > 0) else '') }}
+mediawiki_content_import_accept_hostkey: true
+mediawiki_content_import_become: false
 mediawiki_content_import_patterns:
   - "*.mediawiki"
   - "*.wiki"

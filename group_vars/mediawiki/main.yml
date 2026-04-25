@@ -13,7 +13,7 @@ mediawiki_ssl_subject_alt_name: "IP:10.10.50.46"
 mediawiki_darkmode_enabled: true
 mediawiki_darkmode_archive_url: ""
 mediawiki_content_import_enabled: true
-mediawiki_content_import_repo: "https://github.com/WOLFbl4/dokuwiki.git"
+mediawiki_content_import_repo: "git@github.com:WOLFbl4/dokuwiki.git"
 mediawiki_content_import_version: "main"
 mediawiki_content_import_subdir: "statiya_mediawiki"
 

@@ -297,11 +297,13 @@
   when: mediawiki_content_import_enabled
 
 - name: Clone MediaWiki content import repository
+  become: "{{ mediawiki_content_import_become | bool }}"
   ansible.builtin.git:
     repo: "{{ mediawiki_content_import_repo }}"
     dest: "{{ mediawiki_content_import_checkout_path }}"
     version: "{{ mediawiki_content_import_version }}"
     force: true
+    accept_hostkey: "{{ mediawiki_content_import_accept_hostkey | bool }}"
   when: mediawiki_content_import_enabled
 
 - name: Validate MediaWiki content import source directory

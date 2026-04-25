@@ -114,7 +114,7 @@ https://<your-domain-or-ip>/wiki/Заглавная_страница
 - URL архива MediaWiki: `mediawiki_archive_url`
 - URL архива расширения DarkMode: `mediawiki_darkmode_archive_url`; оставьте пустым, чтобы автоматически найти текущий архив `REL1_45` на extdist
 - Путь публикации: `mediawiki_script_path`
-- Импорт страниц из Git: `mediawiki_content_import_*`
+- Импорт страниц из Git: `mediawiki_content_import_*`; для приватных репозиториев GitHub используйте SSH URL вида `git@github.com:owner/repo.git`, а удалённый Ansible-пользователь должен иметь доступ к репозиторию
 - Имя базы данных, пользователь и схема: `mediawiki_db_*`
 - Версия PostgreSQL: `postgresql_version`
 - Режим SSL и пути к сертификатам: `mediawiki_ssl_*`

@@ -114,7 +114,7 @@ https://<your-domain-or-ip>/wiki/Main_Page
 - MediaWiki archive URL: `mediawiki_archive_url`
 - DarkMode extension archive URL: `mediawiki_darkmode_archive_url`; leave it empty to auto-discover the current `REL1_45` archive from extdist
 - Publish path: `mediawiki_script_path`
-- Page import from Git: `mediawiki_content_import_*`
+- Page import from Git: `mediawiki_content_import_*`; private GitHub repositories should use an SSH URL such as `git@github.com:owner/repo.git`, and the remote Ansible user must have access to that repository
 - Database name, user, and schema: `mediawiki_db_*`
 - PostgreSQL version: `postgresql_version`
 - SSL mode and certificate paths: `mediawiki_ssl_*`
