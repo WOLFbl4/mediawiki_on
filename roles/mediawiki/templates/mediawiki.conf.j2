@@ -40,7 +40,11 @@ server {
 
     location {{ mediawiki_script_path }}/ {
         index index.php;
-        try_files $uri $uri/ {{ mediawiki_script_path }}/index.php?$args;
+        try_files $uri $uri/ @mediawiki_short_url;
+    }
+
+    location @mediawiki_short_url {
+        rewrite ^{{ mediawiki_script_path | regex_escape }}/(.+)$ {{ mediawiki_script_path }}/index.php?title=$1&$args last;
     }
 
     location ~ ^{{ mediawiki_script_path | regex_escape }}/(.+\.php)$ {

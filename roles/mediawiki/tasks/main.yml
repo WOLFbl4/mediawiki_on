@@ -172,6 +172,14 @@
     state: link
     force: true
 
+- name: Configure MediaWiki short URLs
+  ansible.builtin.blockinfile:
+    path: "{{ mediawiki_shared_path }}/LocalSettings.php"
+    marker: "# {mark} ANSIBLE MANAGED SHORT URLS"
+    block: |
+      $wgArticlePath = "{{ mediawiki_article_path }}";
+      $wgUsePathInfo = true;
+
 - name: Check whether DarkMode extension is installed
   ansible.builtin.stat:
     path: "{{ mediawiki_darkmode_extension_path }}/extension.json"

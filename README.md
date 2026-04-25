@@ -92,6 +92,12 @@ After the playbook finishes, the wiki should be available at:
 https://<your-domain-or-ip>/wiki
 ```
 
+Article URLs are configured without `index.php`, for example:
+
+```text
+https://<your-domain-or-ip>/wiki/Main_Page
+```
+
 ## Customization
 
 - MediaWiki version: `mediawiki_version`

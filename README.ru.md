@@ -92,6 +92,12 @@ ansible-playbook site.yml
 https://<your-domain-or-ip>/wiki
 ```
 
+Ссылки на страницы настроены без `index.php`, например:
+
+```text
+https://<your-domain-or-ip>/wiki/Заглавная_страница
+```
+
 ## Настройка
 
 - Версия MediaWiki: `mediawiki_version`
