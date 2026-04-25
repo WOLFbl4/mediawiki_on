@@ -11,6 +11,8 @@ Ansible-проект для развёртывания `MediaWiki` с `PostgreSQ
 - устанавливает `Nginx`, `PHP-FPM` и SSL для MediaWiki;
 - загружает `MediaWiki 1.45.3` из официального tarball;
 - устанавливает расширение `DarkMode` из указанного tarball `REL1_45`;
+- включает расширения `Cite` и `EditAccount`;
+- настраивает `MediaWiki:Sidebar`;
 - выполняет CLI-установку MediaWiki и публикует сайт по пути `/wiki`;
 - устанавливает `zabbix-agent2` из официального репозитория Zabbix для `Ubuntu 24.04`.
 
@@ -57,6 +59,8 @@ all:
 - `mediawiki_site_language`
 - `mediawiki_darkmode_enabled`
 - `mediawiki_darkmode_archive_url`
+- `mediawiki_extra_extensions`
+- `mediawiki_sidebar_enabled`
 - `zabbix_agent_server`
 
 Для SSL по умолчанию используется самоподписанный сертификат.

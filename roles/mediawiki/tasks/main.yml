@@ -180,6 +180,80 @@
       $wgArticlePath = "{{ mediawiki_article_path }}";
       $wgUsePathInfo = true;
 
+- name: Check installed MediaWiki extensions
+  ansible.builtin.stat:
+    path: "{{ mediawiki_current_path }}/extensions/{{ item.name }}/extension.json"
+  loop: "{{ mediawiki_extra_extensions }}"
+  register: mediawiki_extra_extension_stats
+
+- name: Install missing MediaWiki extensions from Gerrit
+  ansible.builtin.git:
+    repo: "{{ item.item.git_repo }}"
+    dest: "{{ mediawiki_current_path }}/extensions/{{ item.item.name }}"
+    version: "{{ item.item.git_version }}"
+    force: true
+  loop: "{{ mediawiki_extra_extension_stats.results }}"
+  when: not item.stat.exists
+
+- name: Enable MediaWiki extensions and extension settings
+  ansible.builtin.blockinfile:
+    path: "{{ mediawiki_shared_path }}/LocalSettings.php"
+    marker: "# {mark} ANSIBLE MANAGED EXTENSIONS"
+    block: |
+      {% for extension in mediawiki_extra_extensions %}
+      {{ extension.loader_line }}
+      {% endfor %}
+      {% for config_line in mediawiki_extension_config_lines %}
+      {{ config_line }}
+      {% endfor %}
+
+- name: Render MediaWiki sidebar content
+  ansible.builtin.template:
+    src: mediawiki-sidebar.wikitext.j2
+    dest: "{{ mediawiki_shared_path }}/Sidebar.wikitext"
+    owner: root
+    group: root
+    mode: "0644"
+  when: mediawiki_sidebar_enabled
+
+- name: Read current MediaWiki sidebar page
+  ansible.builtin.command:
+    argv:
+      - php
+      - maintenance/run.php
+      - getText
+      - "{{ mediawiki_sidebar_page }}"
+  args:
+    chdir: "{{ mediawiki_current_path }}"
+  register: mediawiki_sidebar_current
+  changed_when: false
+  failed_when: false
+  when: mediawiki_sidebar_enabled
+
+- name: Read desired MediaWiki sidebar content
+  ansible.builtin.slurp:
+    src: "{{ mediawiki_shared_path }}/Sidebar.wikitext"
+  register: mediawiki_sidebar_desired
+  when: mediawiki_sidebar_enabled
+
+- name: Configure MediaWiki sidebar page
+  ansible.builtin.command:
+    argv:
+      - php
+      - maintenance/run.php
+      - edit
+      - -u
+      - "{{ mediawiki_sidebar_editor }}"
+      - -s
+      - "{{ mediawiki_sidebar_summary }}"
+      - "{{ mediawiki_sidebar_page }}"
+    stdin: "{{ mediawiki_sidebar_desired.content | b64decode }}"
+  args:
+    chdir: "{{ mediawiki_current_path }}"
+  when:
+    - mediawiki_sidebar_enabled
+    - mediawiki_sidebar_current.stdout != (mediawiki_sidebar_desired.content | b64decode)
+
 - name: Check whether DarkMode extension is installed
   ansible.builtin.stat:
     path: "{{ mediawiki_darkmode_extension_path }}/extension.json"

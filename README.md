@@ -11,6 +11,8 @@ What this project does:
 - installs `Nginx`, `PHP-FPM`, and SSL for MediaWiki;
 - downloads `MediaWiki 1.45.3` from the official tarball;
 - installs the `DarkMode` extension from the provided `REL1_45` tarball;
+- enables the `Cite` and `EditAccount` extensions;
+- configures `MediaWiki:Sidebar`;
 - runs the MediaWiki CLI installer and publishes the site under `/wiki`;
 - installs `zabbix-agent2` from the official Zabbix repository for `Ubuntu 24.04`.
 
@@ -57,6 +59,8 @@ all:
 - `mediawiki_site_language`
 - `mediawiki_darkmode_enabled`
 - `mediawiki_darkmode_archive_url`
+- `mediawiki_extra_extensions`
+- `mediawiki_sidebar_enabled`
 - `zabbix_agent_server`
 
 For SSL, the project uses a self-signed certificate by default.

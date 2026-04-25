@@ -18,6 +18,10 @@ mediawiki_article_path: "{{ mediawiki_script_path }}/$1"
 mediawiki_site_language: ru
 mediawiki_wiki_name: MediaWiki
 mediawiki_admin_user: admin
+mediawiki_sidebar_enabled: true
+mediawiki_sidebar_page: "MediaWiki:Sidebar"
+mediawiki_sidebar_summary: "Configure sidebar from Ansible"
+mediawiki_sidebar_editor: "Maintenance script"
 
 mediawiki_db_name: mediawiki
 mediawiki_db_user: mediawiki
@@ -52,9 +56,22 @@ mediawiki_darkmode_extension_path: "{{ mediawiki_current_path }}/extensions/{{ m
 mediawiki_darkmode_git_repo: "https://gerrit.wikimedia.org/r/mediawiki/extensions/DarkMode"
 mediawiki_darkmode_git_version: "{{ mediawiki_darkmode_release_branch }}"
 mediawiki_darkmode_loader_line: "wfLoadExtension( 'DarkMode' );"
+mediawiki_extra_extensions:
+  - name: Cite
+    git_repo: "https://gerrit.wikimedia.org/r/mediawiki/extensions/Cite"
+    git_version: "{{ mediawiki_darkmode_release_branch }}"
+    loader_line: "wfLoadExtension( 'Cite' );"
+  - name: EditAccount
+    git_repo: "https://gerrit.wikimedia.org/r/mediawiki/extensions/EditAccount"
+    git_version: "{{ mediawiki_darkmode_release_branch }}"
+    loader_line: "wfLoadExtension( 'EditAccount' );"
+mediawiki_extension_config_lines:
+  - "$wgGroupPermissions['bureaucrat']['editaccount'] = true;"
+  - "$wgGroupPermissions['sysop']['editaccount'] = true;"
 
 mediawiki_nginx_packages:
   - nginx
+  - git
   - openssl
   - php
   - php-fpm
