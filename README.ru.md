@@ -14,7 +14,6 @@ Ansible-проект для развёртывания `MediaWiki` с `PostgreSQ
 - включает встроенный dark mode в Vector 2022;
 - включает расширения `Cite` и `EditAccount`;
 - настраивает `MediaWiki:Sidebar`;
-- импортирует wiki-страницы из настроенного Git-репозитория;
 - выполняет CLI-установку MediaWiki и публикует сайт по пути `/wiki`;
 - устанавливает `zabbix-agent2` из официального репозитория Zabbix для `Ubuntu 24.04`.
 
@@ -66,7 +65,6 @@ all:
 - `mediawiki_vector_update_existing_users`
 - `mediawiki_extra_extensions`
 - `mediawiki_sidebar_enabled`
-- `mediawiki_content_import_*`
 - `zabbix_agent_server`
 
 Для SSL по умолчанию используется самоподписанный сертификат.
@@ -114,7 +112,6 @@ https://<your-domain-or-ip>/wiki/Заглавная_страница
 - URL архива MediaWiki: `mediawiki_archive_url`
 - URL архива расширения DarkMode: `mediawiki_darkmode_archive_url`; оставьте пустым, чтобы автоматически найти текущий архив `REL1_45` на extdist
 - Путь публикации: `mediawiki_script_path`
-- Импорт страниц из Git: `mediawiki_content_import_*`; для приватных репозиториев GitHub используйте SSH URL вида `git@github.com:owner/repo.git`, а удалённый Ansible-пользователь должен иметь доступ к репозиторию
 - Имя базы данных, пользователь и схема: `mediawiki_db_*`
 - Версия PostgreSQL: `postgresql_version`
 - Режим SSL и пути к сертификатам: `mediawiki_ssl_*`

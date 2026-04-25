@@ -14,7 +14,6 @@ What this project does:
 - enables native Vector 2022 dark mode controls;
 - enables the `Cite` and `EditAccount` extensions;
 - configures `MediaWiki:Sidebar`;
-- imports wiki pages from a configured Git repository;
 - runs the MediaWiki CLI installer and publishes the site under `/wiki`;
 - installs `zabbix-agent2` from the official Zabbix repository for `Ubuntu 24.04`.
 
@@ -66,7 +65,6 @@ all:
 - `mediawiki_vector_update_existing_users`
 - `mediawiki_extra_extensions`
 - `mediawiki_sidebar_enabled`
-- `mediawiki_content_import_*`
 - `zabbix_agent_server`
 
 For SSL, the project uses a self-signed certificate by default.
@@ -114,7 +112,6 @@ https://<your-domain-or-ip>/wiki/Main_Page
 - MediaWiki archive URL: `mediawiki_archive_url`
 - DarkMode extension archive URL: `mediawiki_darkmode_archive_url`; leave it empty to auto-discover the current `REL1_45` archive from extdist
 - Publish path: `mediawiki_script_path`
-- Page import from Git: `mediawiki_content_import_*`; private GitHub repositories should use an SSH URL such as `git@github.com:owner/repo.git`, and the remote Ansible user must have access to that repository
 - Database name, user, and schema: `mediawiki_db_*`
 - PostgreSQL version: `postgresql_version`
 - SSL mode and certificate paths: `mediawiki_ssl_*`
