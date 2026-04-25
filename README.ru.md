@@ -54,6 +54,7 @@ all:
 4. Настройте основные переменные в `group_vars/mediawiki/main.yml`:
 
 - `mediawiki_server_name`
+- `mediawiki_server_aliases`
 - `mediawiki_server_url`
 - `mediawiki_wiki_name`
 - `mediawiki_admin_user`
@@ -72,6 +73,7 @@ all:
 - Оставьте `mediawiki_ssl_mode: "selfsigned"`, если нужен автоматически сгенерированный сертификат.
 - Используйте `mediawiki_ssl_mode: "provided"` и задайте `mediawiki_ssl_cert_path` и `mediawiki_ssl_key_path`, если у вас уже есть сертификат.
 - Если `mediawiki_server_name` содержит IP-адрес, скорректируйте `mediawiki_ssl_subject_alt_name`, например: `IP:203.0.113.10`.
+- Если используете `mediawiki_server_aliases`, добавьте все DNS-имена и IP-адреса в `mediawiki_ssl_subject_alt_name`.
 
 5. Создайте `group_vars/mediawiki/vault.yml` на основе примера:
 
@@ -112,6 +114,7 @@ https://<your-domain-or-ip>/wiki/Заглавная_страница
 - URL архива MediaWiki: `mediawiki_archive_url`
 - URL архива расширения DarkMode: `mediawiki_darkmode_archive_url`; оставьте пустым, чтобы автоматически найти текущий архив `REL1_45` на extdist
 - Путь публикации: `mediawiki_script_path`
+- Дополнительные имена/IP-адреса для того же сайта: `mediawiki_server_aliases`
 - Имя базы данных, пользователь и схема: `mediawiki_db_*`
 - Версия PostgreSQL: `postgresql_version`
 - Режим SSL и пути к сертификатам: `mediawiki_ssl_*`

@@ -180,6 +180,24 @@
       $wgArticlePath = "{{ mediawiki_article_path }}";
       $wgUsePathInfo = true;
 
+- name: Configure MediaWiki allowed hosts
+  ansible.builtin.blockinfile:
+    path: "{{ mediawiki_shared_path }}/LocalSettings.php"
+    marker: "# {mark} ANSIBLE MANAGED SERVER HOSTS"
+    block: |
+      $wgCanonicalServer = '{{ mediawiki_server_url }}';
+      $wgServer = '{{ mediawiki_server_url }}';
+      $wgAnsibleAllowedHosts = [
+      {% for host in mediawiki_allowed_hosts %}
+          '{{ host }}',
+      {% endfor %}
+      ];
+      $wgAnsibleRequestHost = $_SERVER['HTTP_HOST'] ?? '';
+      $wgAnsibleRequestHost = preg_replace( '/:\d+$/', '', $wgAnsibleRequestHost );
+      if ( in_array( $wgAnsibleRequestHost, $wgAnsibleAllowedHosts, true ) ) {
+          $wgServer = 'https://' . $wgAnsibleRequestHost;
+      }
+
 - name: Configure Vector 2022 native dark mode
   ansible.builtin.blockinfile:
     path: "{{ mediawiki_shared_path }}/LocalSettings.php"

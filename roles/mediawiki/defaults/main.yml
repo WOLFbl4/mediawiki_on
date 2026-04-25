@@ -12,6 +12,9 @@ mediawiki_web_root: /var/www/html
 mediawiki_web_path: "{{ mediawiki_web_root }}{{ mediawiki_script_path }}"
 
 mediawiki_server_name: wiki.example.com
+mediawiki_server_aliases: []
+mediawiki_allowed_hosts: "{{ ([mediawiki_server_name] + mediawiki_server_aliases) | unique }}"
+mediawiki_nginx_server_names: "{{ mediawiki_allowed_hosts | join(' ') }}"
 mediawiki_server_url: "https://{{ mediawiki_server_name }}"
 mediawiki_script_path: /wiki
 mediawiki_article_path: "{{ mediawiki_script_path }}/$1"

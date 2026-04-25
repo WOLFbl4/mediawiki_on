@@ -54,6 +54,7 @@ all:
 4. Adjust the main variables in `group_vars/mediawiki/main.yml`:
 
 - `mediawiki_server_name`
+- `mediawiki_server_aliases`
 - `mediawiki_server_url`
 - `mediawiki_wiki_name`
 - `mediawiki_admin_user`
@@ -72,6 +73,7 @@ For SSL, the project uses a self-signed certificate by default.
 - Keep `mediawiki_ssl_mode: "selfsigned"` for an auto-generated certificate.
 - Use `mediawiki_ssl_mode: "provided"` and set `mediawiki_ssl_cert_path` and `mediawiki_ssl_key_path` if you already have a certificate.
 - If `mediawiki_server_name` is an IP address, change `mediawiki_ssl_subject_alt_name` accordingly, for example `IP:203.0.113.10`.
+- If you use `mediawiki_server_aliases`, include every DNS name and IP address in `mediawiki_ssl_subject_alt_name`.
 
 5. Create `group_vars/mediawiki/vault.yml` from the example:
 
@@ -112,6 +114,7 @@ https://<your-domain-or-ip>/wiki/Main_Page
 - MediaWiki archive URL: `mediawiki_archive_url`
 - DarkMode extension archive URL: `mediawiki_darkmode_archive_url`; leave it empty to auto-discover the current `REL1_45` archive from extdist
 - Publish path: `mediawiki_script_path`
+- Additional hostnames/IP addresses for the same site: `mediawiki_server_aliases`
 - Database name, user, and schema: `mediawiki_db_*`
 - PostgreSQL version: `postgresql_version`
 - SSL mode and certificate paths: `mediawiki_ssl_*`
