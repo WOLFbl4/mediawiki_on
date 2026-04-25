@@ -36,6 +36,10 @@ mediawiki_sidebar_enabled: true
 mediawiki_sidebar_page: "MediaWiki:Sidebar"
 mediawiki_sidebar_summary: "Configure sidebar from Ansible"
 mediawiki_sidebar_editor: "Maintenance script"
+mediawiki_site_css_enabled: true
+mediawiki_site_css_page: "MediaWiki:Common.css"
+mediawiki_site_css_summary: "Configure site layout CSS from Ansible"
+mediawiki_site_css_editor: "Maintenance script"
 
 mediawiki_db_name: mediawiki
 mediawiki_db_user: mediawiki

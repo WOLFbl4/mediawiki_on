@@ -354,6 +354,53 @@
     - mediawiki_sidebar_enabled
     - mediawiki_sidebar_current.stdout != (mediawiki_sidebar_desired.content | b64decode)
 
+- name: Render MediaWiki site CSS
+  ansible.builtin.template:
+    src: mediawiki-common.css.j2
+    dest: "{{ mediawiki_shared_path }}/Common.css"
+    owner: root
+    group: root
+    mode: "0644"
+  when: mediawiki_site_css_enabled
+
+- name: Read current MediaWiki site CSS page
+  ansible.builtin.command:
+    argv:
+      - php
+      - maintenance/run.php
+      - getText
+      - "{{ mediawiki_site_css_page }}"
+  args:
+    chdir: "{{ mediawiki_current_path }}"
+  register: mediawiki_site_css_current
+  changed_when: false
+  failed_when: false
+  when: mediawiki_site_css_enabled
+
+- name: Read desired MediaWiki site CSS
+  ansible.builtin.slurp:
+    src: "{{ mediawiki_shared_path }}/Common.css"
+  register: mediawiki_site_css_desired
+  when: mediawiki_site_css_enabled
+
+- name: Configure MediaWiki site CSS page
+  ansible.builtin.command:
+    argv:
+      - php
+      - maintenance/run.php
+      - edit
+      - -u
+      - "{{ mediawiki_site_css_editor }}"
+      - -s
+      - "{{ mediawiki_site_css_summary }}"
+      - "{{ mediawiki_site_css_page }}"
+    stdin: "{{ mediawiki_site_css_desired.content | b64decode }}"
+  args:
+    chdir: "{{ mediawiki_current_path }}"
+  when:
+    - mediawiki_site_css_enabled
+    - mediawiki_site_css_current.stdout != (mediawiki_site_css_desired.content | b64decode)
+
 - name: Check whether DarkMode extension is installed
   ansible.builtin.stat:
     path: "{{ mediawiki_darkmode_extension_path }}/extension.json"

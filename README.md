@@ -67,6 +67,7 @@ all:
 - `mediawiki_vector_update_existing_users`
 - `mediawiki_extra_extensions`
 - `mediawiki_sidebar_enabled`
+- `mediawiki_site_css_enabled`
 - `zabbix_agent_server`
 
 For SSL, the project uses a self-signed certificate by default.
