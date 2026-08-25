@@ -10,6 +10,11 @@ mediawiki_script_path: "/wiki"
 mediawiki_site_language: "ru"
 mediawiki_wiki_name: "My MediaWiki"
 mediawiki_admin_user: "wikiadmin"
+mediawiki_uploads_enabled: true
+mediawiki_default_skin: "citizen"
+mediawiki_citizen_enabled: true
+mediawiki_citizen_version: "v3.21.0"
+mediawiki_citizen_update_existing_users: true
 mediawiki_ssl_mode: "selfsigned"
 mediawiki_ssl_subject_alt_name: "DNS:mwiki.kant.ru,IP:10.10.50.46"
 mediawiki_darkmode_enabled: true

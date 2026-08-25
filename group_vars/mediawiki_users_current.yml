@@ -1,0 +1,189 @@
+---
+# Current MediaWiki user and permission snapshot.
+# Generated from the MediaWiki Action API.
+# Passwords and email addresses are not included.
+mediawiki_users_snapshot:
+  generated_at_utc: "2026-08-25T14:22:24Z"
+  source: "https://mwiki.kant.ru/wiki/api.php"
+  total_users: 5
+
+  registered_user_rights: &registered_user_rights
+    - createaccount
+    - read
+    - edit
+    - createpage
+    - createtalk
+    - viewmyprivateinfo
+    - editmyprivateinfo
+    - editmyoptions
+    - move
+    - move-subpages
+    - move-rootuserpages
+    - move-categorypages
+    - movefile
+    - upload
+    - reupload
+    - reupload-shared
+    - minoredit
+    - editmyusercss
+    - editmyuserjson
+    - editmyuserjs
+    - editmyuserjsredirect
+    - sendemail
+    - applychangetags
+    - changetags
+    - viewmywatchlist
+    - editmywatchlist
+    - autoconfirmed
+    - editsemiprotected
+
+  users:
+    - id: 1
+      name: "MediaWiki default"
+      registration_utc: "2026-04-25T14:17:19Z"
+      edit_count: 1
+      blocked: false
+      explicit_groups: []
+      implicit_groups:
+        - "*"
+        - user
+        - autoconfirmed
+      effective_groups:
+        - "*"
+        - user
+        - autoconfirmed
+      effective_rights: *registered_user_rights
+
+    - id: 2
+      name: "Wikiadmin"
+      registration_utc: "2026-04-25T14:17:20Z"
+      edit_count: 226
+      blocked: false
+      explicit_groups:
+        - sysop
+        - bureaucrat
+        - interface-admin
+      implicit_groups:
+        - "*"
+        - user
+        - autoconfirmed
+      effective_groups:
+        - "*"
+        - user
+        - autoconfirmed
+        - sysop
+        - bureaucrat
+        - interface-admin
+      effective_rights:
+        - userrights
+        - noratelimit
+        - renameuser
+        - editaccount
+        - editinterface
+        - editsitecss
+        - editsitejson
+        - editsitejs
+        - editusercss
+        - edituserjson
+        - edituserjs
+        - block
+        - createaccount
+        - delete
+        - bigdelete
+        - deletedhistory
+        - deletedtext
+        - undelete
+        - editcontentmodel
+        - import
+        - importupload
+        - move
+        - move-subpages
+        - move-rootuserpages
+        - move-categorypages
+        - patrol
+        - autopatrol
+        - protect
+        - editprotected
+        - rollback
+        - upload
+        - reupload
+        - reupload-shared
+        - unwatchedpages
+        - autoconfirmed
+        - editsemiprotected
+        - ipblock-exempt
+        - blockemail
+        - markbotedits
+        - apihighlimits
+        - browsearchive
+        - movefile
+        - unblockself
+        - suppressredirect
+        - mergehistory
+        - managechangetags
+        - deletechangetags
+        - read
+        - edit
+        - createpage
+        - createtalk
+        - viewmyprivateinfo
+        - editmyprivateinfo
+        - editmyoptions
+        - minoredit
+        - editmyusercss
+        - editmyuserjson
+        - editmyuserjs
+        - editmyuserjsredirect
+        - sendemail
+        - applychangetags
+        - changetags
+        - viewmywatchlist
+        - editmywatchlist
+
+    - id: 3
+      name: "Maintenance script"
+      registration_utc: "2026-04-25T15:49:56Z"
+      edit_count: 87
+      blocked: false
+      explicit_groups: []
+      implicit_groups:
+        - "*"
+        - user
+        - autoconfirmed
+      effective_groups:
+        - "*"
+        - user
+        - autoconfirmed
+      effective_rights: *registered_user_rights
+
+    - id: 4
+      name: "Wolf"
+      registration_utc: "2026-04-25T15:55:35Z"
+      edit_count: 0
+      blocked: false
+      explicit_groups: []
+      implicit_groups:
+        - "*"
+        - user
+        - autoconfirmed
+      effective_groups:
+        - "*"
+        - user
+        - autoconfirmed
+      effective_rights: *registered_user_rights
+
+    - id: 5
+      name: "Codex"
+      registration_utc: "2026-08-25T14:09:02Z"
+      edit_count: 0
+      blocked: false
+      explicit_groups: []
+      implicit_groups:
+        - "*"
+        - user
+        - autoconfirmed
+      effective_groups:
+        - "*"
+        - user
+        - autoconfirmed
+      effective_rights: *registered_user_rights

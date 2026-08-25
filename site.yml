@@ -24,6 +24,22 @@
           MediaWiki 1.45.x. Update mediawiki_version or disable DarkMode.
       when: mediawiki_darkmode_enabled
 
+    - name: Validate Citizen compatibility with MediaWiki version
+      ansible.builtin.assert:
+        that:
+          - mediawiki_version is version('1.43.0', '>=')
+        fail_msg: >-
+          Citizen requires MediaWiki 1.43.0 or later. Update
+          mediawiki_version or disable Citizen.
+      when: mediawiki_citizen_enabled
+
+    - name: Validate configured default skin
+      ansible.builtin.assert:
+        that:
+          - mediawiki_default_skin != 'citizen' or mediawiki_citizen_enabled
+        fail_msg: >-
+          Enable mediawiki_citizen_enabled when mediawiki_default_skin is citizen.
+
   roles:
     - role: postgresql
     - role: mediawiki

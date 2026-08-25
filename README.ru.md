@@ -10,9 +10,12 @@ Ansible-проект для развёртывания `MediaWiki` с `PostgreSQ
 - удаляет `Apache`, если он установлен;
 - устанавливает `Nginx`, `PHP-FPM` и SSL для MediaWiki;
 - загружает `MediaWiki 1.45.3` из официального tarball;
+- устанавливает Citizen 3.21.0 и назначает его темой оформления по умолчанию;
 - устанавливает расширение `DarkMode` из указанного tarball `REL1_45`;
 - включает встроенный dark mode в Vector 2022;
-- включает расширения `Cite`, `EditAccount` и `MultimediaViewer`;
+- включает расширения `Cite`, `SyntaxHighlight_GeSHi`, `EditAccount` и
+  `MultimediaViewer`;
+- настраивает загрузку файлов в MediaWiki;
 - настраивает `MediaWiki:Sidebar`;
 - выполняет CLI-установку MediaWiki и публикует сайт по пути `/wiki`;
 - устанавливает `zabbix-agent2` из официального репозитория Zabbix для `Ubuntu 24.04`.
@@ -59,6 +62,10 @@ all:
 - `mediawiki_wiki_name`
 - `mediawiki_admin_user`
 - `mediawiki_site_language`
+- `mediawiki_uploads_enabled`
+- `mediawiki_default_skin`
+- `mediawiki_citizen_enabled`
+- `mediawiki_citizen_version`
 - `mediawiki_darkmode_enabled`
 - `mediawiki_darkmode_archive_url`
 - `mediawiki_vector_dark_mode_enabled`
@@ -114,6 +121,7 @@ https://<your-domain-or-ip>/wiki/Заглавная_страница
 
 - Версия MediaWiki: `mediawiki_version`
 - URL архива MediaWiki: `mediawiki_archive_url`
+- Версия Citizen: `mediawiki_citizen_version`
 - URL архива расширения DarkMode: `mediawiki_darkmode_archive_url`; оставьте пустым, чтобы автоматически найти текущий архив `REL1_45` на extdist
 - Путь публикации: `mediawiki_script_path`
 - Дополнительные имена/IP-адреса для того же сайта: `mediawiki_server_aliases`
@@ -126,6 +134,7 @@ https://<your-domain-or-ip>/wiki/Заглавная_страница
 
 - Проект предполагает, что PostgreSQL работает на том же хосте, что и MediaWiki.
 - По умолчанию используется MediaWiki версии `1.45.3`.
+- Citizen включён как тема по умолчанию; Vector остаётся доступен как резервная тема.
 - Веб-стек по умолчанию: `Nginx + PHP-FPM + HTTPS`.
 - `Apache` останавливается и удаляется, если уже установлен на целевом сервере.
 - `zabbix-agent2` устанавливается из официального репозитория Zabbix.

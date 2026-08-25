@@ -172,6 +172,15 @@
     state: link
     force: true
 
+- name: Configure MediaWiki file uploads
+  ansible.builtin.lineinfile:
+    path: "{{ mediawiki_shared_path }}/LocalSettings.php"
+    regexp: '^\$wgEnableUploads\s*='
+    line: >-
+      $wgEnableUploads =
+      {{ mediawiki_uploads_enabled | bool | ternary('true', 'false') }};
+  notify: Restart php-fpm
+
 - name: Configure MediaWiki short URLs
   ansible.builtin.blockinfile:
     path: "{{ mediawiki_shared_path }}/LocalSettings.php"
@@ -198,13 +207,58 @@
           $wgServer = 'https://' . $wgAnsibleRequestHost;
       }
 
+- name: Install Citizen skin
+  ansible.builtin.git:
+    repo: "{{ mediawiki_citizen_git_repo }}"
+    dest: "{{ mediawiki_citizen_path }}"
+    version: "{{ mediawiki_citizen_version }}"
+    update: true
+    force: true
+  when: mediawiki_citizen_enabled
+
+- name: Enable Citizen skin
+  ansible.builtin.blockinfile:
+    path: "{{ mediawiki_shared_path }}/LocalSettings.php"
+    marker: "# {mark} ANSIBLE MANAGED CITIZEN SKIN"
+    block: |
+      wfLoadSkin( 'Citizen' );
+  when: mediawiki_citizen_enabled
+
+- name: Configure MediaWiki default skin
+  ansible.builtin.blockinfile:
+    path: "{{ mediawiki_shared_path }}/LocalSettings.php"
+    marker: "# {mark} ANSIBLE MANAGED DEFAULT SKIN"
+    block: |
+      $wgDefaultSkin = '{{ mediawiki_default_skin }}';
+
+- name: Update existing users to Citizen
+  ansible.builtin.command:
+    argv:
+      - php
+      - maintenance/run.php
+      - userOptions
+      - skin
+      - --nowarn
+      - --quiet
+      - --old
+      - "{{ item }}"
+      - --new
+      - "{{ mediawiki_default_skin }}"
+  args:
+    chdir: "{{ mediawiki_current_path }}"
+  loop: "{{ mediawiki_citizen_previous_skins }}"
+  changed_when: false
+  when:
+    - mediawiki_citizen_enabled
+    - mediawiki_citizen_update_existing_users
+    - mediawiki_default_skin == 'citizen'
+
 - name: Configure Vector 2022 native dark mode
   ansible.builtin.blockinfile:
     path: "{{ mediawiki_shared_path }}/LocalSettings.php"
     marker: "# {mark} ANSIBLE MANAGED VECTOR DARK MODE"
     block: |
       wfLoadSkin( 'Vector' );
-      $wgDefaultSkin = '{{ mediawiki_default_skin }}';
       $wgVectorNightMode['beta'] = true;
       $wgVectorNightMode['logged_out'] = true;
       $wgVectorNightMode['logged_in'] = true;

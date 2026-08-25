@@ -21,7 +21,16 @@ mediawiki_article_path: "{{ mediawiki_script_path }}/$1"
 mediawiki_site_language: ru
 mediawiki_wiki_name: MediaWiki
 mediawiki_admin_user: admin
+mediawiki_uploads_enabled: false
 mediawiki_default_skin: "vector-2022"
+mediawiki_citizen_enabled: false
+mediawiki_citizen_version: "v3.21.0"
+mediawiki_citizen_git_repo: "https://github.com/StarCitizenTools/mediawiki-skins-Citizen.git"
+mediawiki_citizen_path: "{{ mediawiki_current_path }}/skins/Citizen"
+mediawiki_citizen_update_existing_users: false
+mediawiki_citizen_previous_skins:
+  - vector-2022
+  - vector
 mediawiki_vector_dark_mode_enabled: true
 mediawiki_vector_theme_default: "night"
 mediawiki_vector_full_width_enabled: true
@@ -81,6 +90,10 @@ mediawiki_extra_extensions:
     git_repo: "https://gerrit.wikimedia.org/r/mediawiki/extensions/Cite"
     git_version: "{{ mediawiki_darkmode_release_branch }}"
     loader_line: "wfLoadExtension( 'Cite' );"
+  - name: SyntaxHighlight_GeSHi
+    git_repo: "https://gerrit.wikimedia.org/r/mediawiki/extensions/SyntaxHighlight_GeSHi"
+    git_version: "{{ mediawiki_darkmode_release_branch }}"
+    loader_line: "wfLoadExtension( 'SyntaxHighlight_GeSHi' );"
   - name: EditAccount
     git_repo: "https://gerrit.wikimedia.org/r/mediawiki/extensions/EditAccount"
     git_version: "{{ mediawiki_darkmode_release_branch }}"

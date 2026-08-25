@@ -10,9 +10,12 @@ What this project does:
 - removes `Apache` if it is present;
 - installs `Nginx`, `PHP-FPM`, and SSL for MediaWiki;
 - downloads `MediaWiki 1.45.3` from the official tarball;
+- installs Citizen 3.21.0 and sets it as the default skin;
 - installs the `DarkMode` extension from the provided `REL1_45` tarball;
 - enables native Vector 2022 dark mode controls;
-- enables the `Cite`, `EditAccount`, and `MultimediaViewer` extensions;
+- enables the `Cite`, `SyntaxHighlight_GeSHi`, `EditAccount`, and
+  `MultimediaViewer` extensions;
+- configures MediaWiki file uploads;
 - configures `MediaWiki:Sidebar`;
 - runs the MediaWiki CLI installer and publishes the site under `/wiki`;
 - installs `zabbix-agent2` from the official Zabbix repository for `Ubuntu 24.04`.
@@ -59,6 +62,10 @@ all:
 - `mediawiki_wiki_name`
 - `mediawiki_admin_user`
 - `mediawiki_site_language`
+- `mediawiki_uploads_enabled`
+- `mediawiki_default_skin`
+- `mediawiki_citizen_enabled`
+- `mediawiki_citizen_version`
 - `mediawiki_darkmode_enabled`
 - `mediawiki_darkmode_archive_url`
 - `mediawiki_vector_dark_mode_enabled`
@@ -114,6 +121,7 @@ https://<your-domain-or-ip>/wiki/Main_Page
 
 - MediaWiki version: `mediawiki_version`
 - MediaWiki archive URL: `mediawiki_archive_url`
+- Citizen version: `mediawiki_citizen_version`
 - DarkMode extension archive URL: `mediawiki_darkmode_archive_url`; leave it empty to auto-discover the current `REL1_45` archive from extdist
 - Publish path: `mediawiki_script_path`
 - Additional hostnames/IP addresses for the same site: `mediawiki_server_aliases`
@@ -126,6 +134,7 @@ https://<your-domain-or-ip>/wiki/Main_Page
 
 - The project assumes PostgreSQL runs on the same host as MediaWiki.
 - The default MediaWiki version is `1.45.3`.
+- Citizen is the default skin; Vector remains available as a fallback skin.
 - The default web stack is `Nginx + PHP-FPM + HTTPS`.
 - `Apache` is stopped and purged if it is already installed on the target host.
 - `zabbix-agent2` is installed from the official Zabbix repository.
