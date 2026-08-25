@@ -1,7 +1,7 @@
 ---
 postgresql_version: "16"
 
-mediawiki_version: "1.45.3"
+mediawiki_version: "1.45.4"
 mediawiki_server_name: "mwiki.kant.ru"
 mediawiki_server_aliases:
   - "10.10.50.46"
@@ -11,6 +11,8 @@ mediawiki_site_language: "ru"
 mediawiki_wiki_name: "My MediaWiki"
 mediawiki_admin_user: "wikiadmin"
 mediawiki_uploads_enabled: true
+mediawiki_favicon_enabled: true
+mediawiki_favicon_source: "kant-info.ico"
 mediawiki_default_skin: "citizen"
 mediawiki_citizen_enabled: true
 mediawiki_citizen_version: "v3.21.0"

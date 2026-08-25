@@ -9,7 +9,7 @@ What this project does:
 - installs `PostgreSQL 16` and creates a dedicated database, user, and schema for MediaWiki;
 - removes `Apache` if it is present;
 - installs `Nginx`, `PHP-FPM`, and SSL for MediaWiki;
-- downloads `MediaWiki 1.45.3` from the official tarball;
+- downloads `MediaWiki 1.45.4` from the official tarball;
 - installs Citizen 3.21.0 and sets it as the default skin;
 - installs the `DarkMode` extension from the provided `REL1_45` tarball;
 - enables native Vector 2022 dark mode controls;
@@ -133,7 +133,7 @@ https://<your-domain-or-ip>/wiki/Main_Page
 ## Notes
 
 - The project assumes PostgreSQL runs on the same host as MediaWiki.
-- The default MediaWiki version is `1.45.3`.
+- The default MediaWiki version is `1.45.4`.
 - Citizen is the default skin; Vector remains available as a fallback skin.
 - The default web stack is `Nginx + PHP-FPM + HTTPS`.
 - `Apache` is stopped and purged if it is already installed on the target host.

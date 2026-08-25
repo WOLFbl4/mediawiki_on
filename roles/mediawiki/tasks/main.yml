@@ -181,6 +181,32 @@
       {{ mediawiki_uploads_enabled | bool | ternary('true', 'false') }};
   notify: Restart php-fpm
 
+- name: Install MediaWiki favicon in shared storage
+  ansible.builtin.copy:
+    src: "{{ mediawiki_favicon_source }}"
+    dest: "{{ mediawiki_favicon_shared_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+  when: mediawiki_favicon_enabled
+
+- name: Link MediaWiki favicon into the active release
+  ansible.builtin.file:
+    src: "{{ mediawiki_favicon_shared_path }}"
+    dest: "{{ mediawiki_favicon_path }}"
+    state: link
+    force: true
+  when: mediawiki_favicon_enabled
+
+- name: Configure MediaWiki favicon
+  ansible.builtin.blockinfile:
+    path: "{{ mediawiki_shared_path }}/LocalSettings.php"
+    marker: "# {mark} ANSIBLE MANAGED FAVICON"
+    block: |
+      $wgFavicon = '{{ mediawiki_favicon_url }}';
+  notify: Restart php-fpm
+  when: mediawiki_favicon_enabled
+
 - name: Configure MediaWiki short URLs
   ansible.builtin.blockinfile:
     path: "{{ mediawiki_shared_path }}/LocalSettings.php"
