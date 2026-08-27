@@ -3,7 +3,7 @@
 # Generated from the MediaWiki Action API.
 # Passwords and email addresses are not included.
 mediawiki_users_snapshot:
-  generated_at_utc: "2026-08-25T14:22:24Z"
+  generated_at_utc: "2026-08-27T14:12:35Z"
   source: "https://mwiki.kant.ru/wiki/api.php"
   total_users: 5
 
@@ -57,7 +57,7 @@ mediawiki_users_snapshot:
     - id: 2
       name: "Wikiadmin"
       registration_utc: "2026-04-25T14:17:20Z"
-      edit_count: 226
+      edit_count: 228
       blocked: false
       explicit_groups:
         - sysop
@@ -159,7 +159,7 @@ mediawiki_users_snapshot:
     - id: 4
       name: "Wolf"
       registration_utc: "2026-04-25T15:55:35Z"
-      edit_count: 0
+      edit_count: 1
       blocked: false
       explicit_groups: []
       implicit_groups:
@@ -175,7 +175,7 @@ mediawiki_users_snapshot:
     - id: 5
       name: "Codex"
       registration_utc: "2026-08-25T14:09:02Z"
-      edit_count: 0
+      edit_count: 83
       blocked: false
       explicit_groups: []
       implicit_groups:

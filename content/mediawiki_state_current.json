@@ -1,0 +1,1153 @@
+{
+  "snapshot_format": 1,
+  "generated_at_utc": "2026-08-27T14:12:35Z",
+  "source": "https://mwiki.kant.ru/wiki/api.php",
+  "content_policy": "Metadata only; article text, deleted revisions, email addresses, passwords, and uploaded file bodies are excluded.",
+  "site": {
+    "name": "My MediaWiki",
+    "main_page": "Заглавная страница",
+    "mediawiki_version": "1.45.4",
+    "php_version": "8.3.6",
+    "database": {
+      "type": "postgres",
+      "version": "16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)"
+    },
+    "language": "ru",
+    "server": "https://mwiki.kant.ru",
+    "script_path": "/wiki",
+    "article_path": "/wiki/$1",
+    "default_skin": "citizen",
+    "uploads_enabled": true,
+    "favicon": "https://mwiki.kant.ru/wiki/favicon.ico"
+  },
+  "statistics": {
+    "pages": 120,
+    "articles": 14,
+    "edits": 322,
+    "images": 1,
+    "users": 3,
+    "activeusers": 3,
+    "admins": 1,
+    "jobs": 0,
+    "main_namespace_pages": 98,
+    "known_categories": 19
+  },
+  "extensions": [
+    {
+      "name": "Cite",
+      "type": "parserhook",
+      "version": null
+    },
+    {
+      "name": "DarkMode",
+      "type": "other",
+      "version": "0.2.1"
+    },
+    {
+      "name": "EditAccount",
+      "type": "specialpage",
+      "version": "1.3.5"
+    },
+    {
+      "name": "MultimediaViewer",
+      "type": "other",
+      "version": null
+    },
+    {
+      "name": "SyntaxHighlight",
+      "type": "parserhook",
+      "version": "2.0"
+    }
+  ],
+  "skins": [
+    {
+      "code": "apioutput",
+      "name": "ApiOutput",
+      "default": false,
+      "usable": false
+    },
+    {
+      "code": "authentication-popup",
+      "name": "Authentication popup",
+      "default": false,
+      "usable": false
+    },
+    {
+      "code": "citizen",
+      "name": "Citizen",
+      "default": true,
+      "usable": true
+    },
+    {
+      "code": "fallback",
+      "name": "Fallback",
+      "default": false,
+      "usable": false
+    },
+    {
+      "code": "json",
+      "name": "SkinJSON",
+      "default": false,
+      "usable": false
+    },
+    {
+      "code": "minerva",
+      "name": "MinervaNeue",
+      "default": false,
+      "usable": true
+    },
+    {
+      "code": "monobook",
+      "name": "MonoBook",
+      "default": false,
+      "usable": true
+    },
+    {
+      "code": "timeless",
+      "name": "Timeless",
+      "default": false,
+      "usable": true
+    },
+    {
+      "code": "vector",
+      "name": "Вектор, устаревшая (2010)",
+      "default": false,
+      "usable": true
+    },
+    {
+      "code": "vector-2022",
+      "name": "Вектор (2022)",
+      "default": false,
+      "usable": true
+    }
+  ],
+  "articles": [
+    {
+      "page_id": 3,
+      "title": "Centos",
+      "revision_id": 368,
+      "updated_at_utc": "2026-08-26T12:05:11Z",
+      "categories": [
+        "CentOS"
+      ]
+    },
+    {
+      "page_id": 4,
+      "title": "Centos:install mysql 5.7",
+      "revision_id": 369,
+      "updated_at_utc": "2026-08-26T12:05:22Z",
+      "categories": [
+        "CentOS"
+      ]
+    },
+    {
+      "page_id": 5,
+      "title": "Centos:ssh авторизация по ключу",
+      "revision_id": 370,
+      "updated_at_utc": "2026-08-26T12:05:26Z",
+      "categories": [
+        "CentOS"
+      ]
+    },
+    {
+      "page_id": 6,
+      "title": "Centos:ssh ключи в ad",
+      "revision_id": 371,
+      "updated_at_utc": "2026-08-26T12:05:35Z",
+      "categories": [
+        "CentOS"
+      ]
+    },
+    {
+      "page_id": 7,
+      "title": "Centos:ssh команды",
+      "revision_id": 372,
+      "updated_at_utc": "2026-08-26T12:05:37Z",
+      "categories": [
+        "CentOS"
+      ]
+    },
+    {
+      "page_id": 8,
+      "title": "Centos:настройка сервера",
+      "revision_id": 373,
+      "updated_at_utc": "2026-08-26T12:05:42Z",
+      "categories": [
+        "CentOS"
+      ]
+    },
+    {
+      "page_id": 9,
+      "title": "Centos:права доступа",
+      "revision_id": 374,
+      "updated_at_utc": "2026-08-26T12:05:45Z",
+      "categories": [
+        "CentOS"
+      ]
+    },
+    {
+      "page_id": 10,
+      "title": "Certification",
+      "revision_id": 302,
+      "updated_at_utc": "2026-08-25T13:06:12Z",
+      "categories": [
+        "Справочные материалы"
+      ]
+    },
+    {
+      "page_id": 11,
+      "title": "Docker",
+      "revision_id": 183,
+      "updated_at_utc": "2026-08-25T12:01:05Z",
+      "categories": [
+        "Docker"
+      ]
+    },
+    {
+      "page_id": 12,
+      "title": "Docker:get docker for centos",
+      "revision_id": 184,
+      "updated_at_utc": "2026-08-25T12:01:05Z",
+      "categories": [
+        "Docker"
+      ]
+    },
+    {
+      "page_id": 13,
+      "title": "Exchange",
+      "revision_id": 401,
+      "updated_at_utc": "2026-08-27T13:36:29Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 14,
+      "title": "Exchange:address book",
+      "revision_id": 319,
+      "updated_at_utc": "2026-08-25T16:43:49Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 15,
+      "title": "Exchange:dkim в exchange",
+      "revision_id": 329,
+      "updated_at_utc": "2026-08-25T19:23:58Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 16,
+      "title": "Exchange:mapiexceptionnetworkerror",
+      "revision_id": 321,
+      "updated_at_utc": "2026-08-25T16:44:02Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 17,
+      "title": "Exchange:powershell команды",
+      "revision_id": 322,
+      "updated_at_utc": "2026-08-25T16:44:07Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 18,
+      "title": "Exchange:sostoyanie ocheredi",
+      "revision_id": 323,
+      "updated_at_utc": "2026-08-25T16:44:15Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 126,
+      "title": "Exchange:диагностика и восстановление баз данных",
+      "revision_id": 399,
+      "updated_at_utc": "2026-08-27T13:18:24Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 19,
+      "title": "Exchange:импорт экспорт pst",
+      "revision_id": 324,
+      "updated_at_utc": "2026-08-25T16:44:18Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 125,
+      "title": "Exchange:миграция Exchange 2013 на Exchange Server SE",
+      "revision_id": 398,
+      "updated_at_utc": "2026-08-27T13:01:54Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 20,
+      "title": "Exchange:преобразование пя",
+      "revision_id": 325,
+      "updated_at_utc": "2026-08-25T16:44:27Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 21,
+      "title": "Exchange:сравнивать два объекта",
+      "revision_id": 326,
+      "updated_at_utc": "2026-08-25T16:44:29Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 22,
+      "title": "Exchange:транспортная очередь",
+      "revision_id": 327,
+      "updated_at_utc": "2026-08-25T16:44:38Z",
+      "categories": [
+        "Microsoft Exchange"
+      ]
+    },
+    {
+      "page_id": 23,
+      "title": "Extreme",
+      "revision_id": 195,
+      "updated_at_utc": "2026-08-25T12:01:11Z",
+      "categories": [
+        "Extreme Networks"
+      ]
+    },
+    {
+      "page_id": 24,
+      "title": "Extreme:username",
+      "revision_id": 196,
+      "updated_at_utc": "2026-08-25T12:01:12Z",
+      "categories": [
+        "Extreme Networks"
+      ]
+    },
+    {
+      "page_id": 25,
+      "title": "Extreme:конфигурация",
+      "revision_id": 290,
+      "updated_at_utc": "2026-08-25T13:06:08Z",
+      "categories": [
+        "Extreme Networks"
+      ]
+    },
+    {
+      "page_id": 26,
+      "title": "Extreme:настройка",
+      "revision_id": 198,
+      "updated_at_utc": "2026-08-25T12:01:13Z",
+      "categories": [
+        "Extreme Networks"
+      ]
+    },
+    {
+      "page_id": 27,
+      "title": "File",
+      "revision_id": 293,
+      "updated_at_utc": "2026-08-25T13:06:09Z",
+      "categories": [
+        "Справочные материалы"
+      ]
+    },
+    {
+      "page_id": 28,
+      "title": "Google",
+      "revision_id": 200,
+      "updated_at_utc": "2026-08-25T12:01:14Z",
+      "categories": [
+        "Google"
+      ]
+    },
+    {
+      "page_id": 29,
+      "title": "Google/Googleupdate",
+      "revision_id": 201,
+      "updated_at_utc": "2026-08-25T12:01:14Z",
+      "categories": [
+        "Google"
+      ]
+    },
+    {
+      "page_id": 30,
+      "title": "Mikrotik",
+      "revision_id": 202,
+      "updated_at_utc": "2026-08-25T12:01:15Z",
+      "categories": [
+        "MikroTik"
+      ]
+    },
+    {
+      "page_id": 31,
+      "title": "Mikrotik:блокируем сканирующие хосты",
+      "revision_id": 203,
+      "updated_at_utc": "2026-08-25T12:01:15Z",
+      "categories": [
+        "MikroTik"
+      ]
+    },
+    {
+      "page_id": 32,
+      "title": "Mikrotik:конфигурация в txt",
+      "revision_id": 204,
+      "updated_at_utc": "2026-08-25T12:01:16Z",
+      "categories": [
+        "MikroTik"
+      ]
+    },
+    {
+      "page_id": 33,
+      "title": "Ms sql srv",
+      "revision_id": 391,
+      "updated_at_utc": "2026-08-26T15:01:26Z",
+      "categories": [
+        "Microsoft SQL Server"
+      ]
+    },
+    {
+      "page_id": 34,
+      "title": "Ms sql srv:error install mssql",
+      "revision_id": 392,
+      "updated_at_utc": "2026-08-26T15:01:37Z",
+      "categories": [
+        "Microsoft SQL Server"
+      ]
+    },
+    {
+      "page_id": 35,
+      "title": "Ms sql srv:ms sql на linux",
+      "revision_id": 393,
+      "updated_at_utc": "2026-08-26T15:01:48Z",
+      "categories": [
+        "Microsoft SQL Server"
+      ]
+    },
+    {
+      "page_id": 36,
+      "title": "Ms sql srv:run connect - red hat",
+      "revision_id": 394,
+      "updated_at_utc": "2026-08-26T15:02:02Z",
+      "categories": [
+        "Microsoft SQL Server"
+      ]
+    },
+    {
+      "page_id": 37,
+      "title": "Ms sql srv:tempdb na ramdisk",
+      "revision_id": 395,
+      "updated_at_utc": "2026-08-26T15:02:14Z",
+      "categories": [
+        "Microsoft SQL Server"
+      ]
+    },
+    {
+      "page_id": 38,
+      "title": "Netapp",
+      "revision_id": 330,
+      "updated_at_utc": "2026-08-25T19:46:38Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 39,
+      "title": "Netapp:ad authentication",
+      "revision_id": 331,
+      "updated_at_utc": "2026-08-25T19:47:10Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 40,
+      "title": "Netapp:cifs session",
+      "revision_id": 332,
+      "updated_at_utc": "2026-08-25T19:47:11Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 41,
+      "title": "Netapp:configure iscsi in svm",
+      "revision_id": 333,
+      "updated_at_utc": "2026-08-25T19:47:13Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 42,
+      "title": "Netapp:installing drive firmware",
+      "revision_id": 334,
+      "updated_at_utc": "2026-08-25T19:47:15Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 43,
+      "title": "Netapp:rehosting one svm to svm",
+      "revision_id": 335,
+      "updated_at_utc": "2026-08-25T19:47:17Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 44,
+      "title": "Netapp:rehosting one svm to svm:rehosting san volumes",
+      "revision_id": 336,
+      "updated_at_utc": "2026-08-25T19:47:42Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 45,
+      "title": "Netapp:rehosting one svm to svm:volume rehost",
+      "revision_id": 337,
+      "updated_at_utc": "2026-08-25T19:47:43Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 46,
+      "title": "Netapp:группы политик qos",
+      "revision_id": 338,
+      "updated_at_utc": "2026-08-25T19:47:46Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 47,
+      "title": "Netapp:истекает сертификат ca",
+      "revision_id": 339,
+      "updated_at_utc": "2026-08-25T19:47:49Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 48,
+      "title": "Netapp:как настроить дедупликацию",
+      "revision_id": 340,
+      "updated_at_utc": "2026-08-25T19:47:51Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 49,
+      "title": "Netapp:настройка сети",
+      "revision_id": 341,
+      "updated_at_utc": "2026-08-25T19:48:14Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 111,
+      "title": "Netapp:обновление ontap на aff a220",
+      "revision_id": 347,
+      "updated_at_utc": "2026-08-25T20:19:20Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 109,
+      "title": "Netapp:оптимизация агрегатов adp на fas2750",
+      "revision_id": 345,
+      "updated_at_utc": "2026-08-25T20:00:11Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 50,
+      "title": "Netapp:процедура постепенного отключения",
+      "revision_id": 342,
+      "updated_at_utc": "2026-08-25T19:48:16Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 51,
+      "title": "Netapp:создание нового svm",
+      "revision_id": 343,
+      "updated_at_utc": "2026-08-25T19:48:19Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 52,
+      "title": "Netapp:список команд",
+      "revision_id": 344,
+      "updated_at_utc": "2026-08-25T19:48:23Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 110,
+      "title": "Netapp:удаление lun, принадлежащего application",
+      "revision_id": 348,
+      "updated_at_utc": "2026-08-25T20:20:13Z",
+      "categories": [
+        "NetApp"
+      ]
+    },
+    {
+      "page_id": 53,
+      "title": "Openvpn",
+      "revision_id": 225,
+      "updated_at_utc": "2026-08-25T12:01:27Z",
+      "categories": [
+        "OpenVPN"
+      ]
+    },
+    {
+      "page_id": 54,
+      "title": "Openvpn:настроить сервер",
+      "revision_id": 226,
+      "updated_at_utc": "2026-08-25T12:01:28Z",
+      "categories": [
+        "OpenVPN"
+      ]
+    },
+    {
+      "page_id": 55,
+      "title": "Openvpn:описание команд",
+      "revision_id": 288,
+      "updated_at_utc": "2026-08-25T13:06:07Z",
+      "categories": [
+        "OpenVPN"
+      ]
+    },
+    {
+      "page_id": 56,
+      "title": "Openvpn:просмотр активных соединений",
+      "revision_id": 228,
+      "updated_at_utc": "2026-08-25T12:01:29Z",
+      "categories": [
+        "OpenVPN"
+      ]
+    },
+    {
+      "page_id": 57,
+      "title": "Openvpn:сервер и клиент на mikrotik",
+      "revision_id": 229,
+      "updated_at_utc": "2026-08-25T12:01:30Z",
+      "categories": [
+        "OpenVPN"
+      ]
+    },
+    {
+      "page_id": 58,
+      "title": "Playground:playground",
+      "revision_id": 230,
+      "updated_at_utc": "2026-08-25T12:01:30Z",
+      "categories": [
+        "Служебные страницы"
+      ]
+    },
+    {
+      "page_id": 59,
+      "title": "Python",
+      "revision_id": 396,
+      "updated_at_utc": "2026-08-26T15:53:33Z",
+      "categories": [
+        "Python"
+      ]
+    },
+    {
+      "page_id": 60,
+      "title": "Python:windows log",
+      "revision_id": 397,
+      "updated_at_utc": "2026-08-26T15:53:43Z",
+      "categories": [
+        "Python"
+      ]
+    },
+    {
+      "page_id": 61,
+      "title": "Sidebar",
+      "revision_id": 284,
+      "updated_at_utc": "2026-08-25T13:06:06Z",
+      "categories": [
+        "Служебные страницы"
+      ]
+    },
+    {
+      "page_id": 62,
+      "title": "Soft",
+      "revision_id": 234,
+      "updated_at_utc": "2026-08-25T12:01:32Z",
+      "categories": [
+        "Программное обеспечение"
+      ]
+    },
+    {
+      "page_id": 63,
+      "title": "Soft:winramtech ramdisk",
+      "revision_id": 317,
+      "updated_at_utc": "2026-08-25T14:52:44Z",
+      "categories": [
+        "Программное обеспечение"
+      ]
+    },
+    {
+      "page_id": 113,
+      "title": "Ubuntu",
+      "revision_id": 376,
+      "updated_at_utc": "2026-08-26T12:25:11Z",
+      "categories": [
+        "Ubuntu"
+      ]
+    },
+    {
+      "page_id": 115,
+      "title": "Ubuntu:ssh авторизация по ключу",
+      "revision_id": 378,
+      "updated_at_utc": "2026-08-26T12:25:21Z",
+      "categories": [
+        "Ubuntu"
+      ]
+    },
+    {
+      "page_id": 116,
+      "title": "Ubuntu:ssh ключи в ad",
+      "revision_id": 379,
+      "updated_at_utc": "2026-08-26T12:25:23Z",
+      "categories": [
+        "Ubuntu"
+      ]
+    },
+    {
+      "page_id": 117,
+      "title": "Ubuntu:ssh команды",
+      "revision_id": 380,
+      "updated_at_utc": "2026-08-26T12:25:31Z",
+      "categories": [
+        "Ubuntu"
+      ]
+    },
+    {
+      "page_id": 123,
+      "title": "Ubuntu:sudo без пароля",
+      "revision_id": 389,
+      "updated_at_utc": "2026-08-26T14:30:02Z",
+      "categories": [
+        "Ubuntu"
+      ]
+    },
+    {
+      "page_id": 121,
+      "title": "Ubuntu:автоматическая установка в VMware",
+      "revision_id": 387,
+      "updated_at_utc": "2026-08-26T14:03:59Z",
+      "categories": [
+        "Ubuntu",
+        "VMware"
+      ]
+    },
+    {
+      "page_id": 118,
+      "title": "Ubuntu:настройка сервера",
+      "revision_id": 381,
+      "updated_at_utc": "2026-08-26T12:25:33Z",
+      "categories": [
+        "Ubuntu"
+      ]
+    },
+    {
+      "page_id": 124,
+      "title": "Ubuntu:очистка дискового пространства",
+      "revision_id": 390,
+      "updated_at_utc": "2026-08-26T14:30:03Z",
+      "categories": [
+        "Ubuntu"
+      ]
+    },
+    {
+      "page_id": 119,
+      "title": "Ubuntu:права доступа",
+      "revision_id": 382,
+      "updated_at_utc": "2026-08-26T12:25:36Z",
+      "categories": [
+        "Ubuntu"
+      ]
+    },
+    {
+      "page_id": 122,
+      "title": "Ubuntu:смена IP-адреса",
+      "revision_id": 388,
+      "updated_at_utc": "2026-08-26T14:30:01Z",
+      "categories": [
+        "Ubuntu"
+      ]
+    },
+    {
+      "page_id": 114,
+      "title": "Ubuntu:установка MySQL",
+      "revision_id": 377,
+      "updated_at_utc": "2026-08-26T12:25:19Z",
+      "categories": [
+        "Ubuntu"
+      ]
+    },
+    {
+      "page_id": 64,
+      "title": "Vmware",
+      "revision_id": 349,
+      "updated_at_utc": "2026-08-26T09:46:22Z",
+      "categories": [
+        "VMware"
+      ]
+    },
+    {
+      "page_id": 65,
+      "title": "Vmware:503 service",
+      "revision_id": 350,
+      "updated_at_utc": "2026-08-26T09:47:01Z",
+      "categories": [
+        "VMware"
+      ]
+    },
+    {
+      "page_id": 66,
+      "title": "Vmware:vmware tools",
+      "revision_id": 351,
+      "updated_at_utc": "2026-08-26T09:47:47Z",
+      "categories": [
+        "VMware"
+      ]
+    },
+    {
+      "page_id": 67,
+      "title": "Vmware:перенос физического сервера windows",
+      "revision_id": 352,
+      "updated_at_utc": "2026-08-26T09:48:22Z",
+      "categories": [
+        "VMware"
+      ]
+    },
+    {
+      "page_id": 73,
+      "title": "Windows server",
+      "revision_id": 353,
+      "updated_at_utc": "2026-08-26T10:23:01Z",
+      "categories": [
+        "Windows Server"
+      ]
+    },
+    {
+      "page_id": 74,
+      "title": "Windows server:ad",
+      "revision_id": 354,
+      "updated_at_utc": "2026-08-26T10:23:04Z",
+      "categories": [
+        "Windows Server"
+      ]
+    },
+    {
+      "page_id": 75,
+      "title": "Windows server:autologon",
+      "revision_id": 355,
+      "updated_at_utc": "2026-08-26T10:23:07Z",
+      "categories": [
+        "Windows Server"
+      ]
+    },
+    {
+      "page_id": 76,
+      "title": "Windows server:rdp session",
+      "revision_id": 356,
+      "updated_at_utc": "2026-08-26T10:23:09Z",
+      "categories": [
+        "Windows Server",
+        "Страницы с ошибками в подсветке синтаксиса"
+      ]
+    },
+    {
+      "page_id": 77,
+      "title": "Windows server:sbros sid",
+      "revision_id": 357,
+      "updated_at_utc": "2026-08-26T10:23:47Z",
+      "categories": [
+        "Windows Server",
+        "Страницы с ошибками в подсветке синтаксиса"
+      ]
+    },
+    {
+      "page_id": 78,
+      "title": "Windows server:автоподключение vpn",
+      "revision_id": 358,
+      "updated_at_utc": "2026-08-26T10:23:49Z",
+      "categories": [
+        "Windows Server",
+        "Страницы с ошибками в подсветке синтаксиса"
+      ]
+    },
+    {
+      "page_id": 79,
+      "title": "Windows server:активация vm",
+      "revision_id": 359,
+      "updated_at_utc": "2026-08-26T10:23:51Z",
+      "categories": [
+        "Windows Server",
+        "Страницы с ошибками в подсветке синтаксиса"
+      ]
+    },
+    {
+      "page_id": 112,
+      "title": "Windows server:замена контроллера домена 2012 на 2019",
+      "revision_id": 367,
+      "updated_at_utc": "2026-08-26T10:34:08Z",
+      "categories": [
+        "Windows Server"
+      ]
+    },
+    {
+      "page_id": 80,
+      "title": "Windows server:извлечение usb",
+      "revision_id": 360,
+      "updated_at_utc": "2026-08-26T10:23:53Z",
+      "categories": [
+        "Windows Server",
+        "Страницы с ошибками в подсветке синтаксиса"
+      ]
+    },
+    {
+      "page_id": 81,
+      "title": "Windows server:изменение редакции",
+      "revision_id": 361,
+      "updated_at_utc": "2026-08-26T10:24:26Z",
+      "categories": [
+        "Windows Server",
+        "Страницы с ошибками в подсветке синтаксиса"
+      ]
+    },
+    {
+      "page_id": 82,
+      "title": "Windows server:лицензирование-сервера-терминалов",
+      "revision_id": 365,
+      "updated_at_utc": "2026-08-26T10:28:41Z",
+      "categories": [
+        "Windows Server",
+        "Страницы с ошибками в подсветке синтаксиса"
+      ]
+    },
+    {
+      "page_id": 83,
+      "title": "Windows server:папку как привод",
+      "revision_id": 363,
+      "updated_at_utc": "2026-08-26T10:24:31Z",
+      "categories": [
+        "Windows Server",
+        "Страницы с ошибками в подсветке синтаксиса"
+      ]
+    },
+    {
+      "page_id": 84,
+      "title": "Windows server:утилит pstools",
+      "revision_id": 364,
+      "updated_at_utc": "2026-08-26T10:24:33Z",
+      "categories": [
+        "Windows Server",
+        "Страницы с ошибками в подсветке синтаксиса"
+      ]
+    },
+    {
+      "page_id": 85,
+      "title": "Yandex cloud",
+      "revision_id": 257,
+      "updated_at_utc": "2026-08-25T12:01:45Z",
+      "categories": [
+        "Yandex Cloud"
+      ]
+    },
+    {
+      "page_id": 86,
+      "title": "Yandex cloud:сервисные аккаунты",
+      "revision_id": 258,
+      "updated_at_utc": "2026-08-25T12:01:45Z",
+      "categories": [
+        "Yandex Cloud"
+      ]
+    },
+    {
+      "page_id": 1,
+      "title": "Заглавная страница",
+      "revision_id": 174,
+      "updated_at_utc": "2026-08-25T12:01:00Z",
+      "categories": [
+        "Служебные страницы"
+      ]
+    },
+    {
+      "page_id": 87,
+      "title": "Ссылки",
+      "revision_id": 259,
+      "updated_at_utc": "2026-08-25T12:01:46Z",
+      "categories": [
+        "Справочные материалы"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "name": "CentOS",
+      "pages": 7,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 7
+    },
+    {
+      "name": "Docker",
+      "pages": 2,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 2
+    },
+    {
+      "name": "Extreme Networks",
+      "pages": 4,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 4
+    },
+    {
+      "name": "Google",
+      "pages": 2,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 2
+    },
+    {
+      "name": "Microsoft Exchange",
+      "pages": 12,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 12
+    },
+    {
+      "name": "Microsoft SQL Server",
+      "pages": 5,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 5
+    },
+    {
+      "name": "MikroTik",
+      "pages": 3,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 3
+    },
+    {
+      "name": "NetApp",
+      "pages": 18,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 18
+    },
+    {
+      "name": "OpenVPN",
+      "pages": 5,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 5
+    },
+    {
+      "name": "Python",
+      "pages": 2,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 2
+    },
+    {
+      "name": "Ubuntu",
+      "pages": 11,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 11
+    },
+    {
+      "name": "VMware",
+      "pages": 5,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 5
+    },
+    {
+      "name": "Windows Server",
+      "pages": 13,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 13
+    },
+    {
+      "name": "Yandex Cloud",
+      "pages": 2,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 2
+    },
+    {
+      "name": "Программное обеспечение",
+      "pages": 2,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 2
+    },
+    {
+      "name": "Разделы",
+      "pages": 0,
+      "files": 0,
+      "subcategories": 16,
+      "total_members": 16
+    },
+    {
+      "name": "Служебные страницы",
+      "pages": 3,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 3
+    },
+    {
+      "name": "Справочные материалы",
+      "pages": 3,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 3
+    },
+    {
+      "name": "Страницы с ошибками в подсветке синтаксиса",
+      "pages": 9,
+      "files": 0,
+      "subcategories": 0,
+      "total_members": 9
+    }
+  ]
+}

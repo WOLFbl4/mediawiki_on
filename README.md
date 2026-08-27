@@ -26,6 +26,8 @@ What this project does:
 - `inventory/hosts.yml` - inventory
 - `group_vars/mediawiki/main.yml` - main variables
 - `group_vars/mediawiki/vault.yml.example` - example secrets file
+- `group_vars/mediawiki_users_current.yml` - current user and permission snapshot without email addresses or passwords
+- `content/mediawiki_state_current.json` - current public site settings, article metadata, and category inventory
 - `roles/postgresql` - PostgreSQL installation and initialization
 - `roles/mediawiki` - MediaWiki, Nginx, PHP-FPM, and SSL setup
 - `roles/zabbix_agent2` - Zabbix Agent 2 setup
@@ -133,6 +135,8 @@ https://<your-domain-or-ip>/wiki/Main_Page
 ## Notes
 
 - The project assumes PostgreSQL runs on the same host as MediaWiki.
+- State snapshots record the live site at their generation time and are not applied by the playbook.
+- Article bodies and uploaded files are excluded from the repository snapshot to avoid publishing operational secrets.
 - The default MediaWiki version is `1.45.4`.
 - Citizen is the default skin; Vector remains available as a fallback skin.
 - The default web stack is `Nginx + PHP-FPM + HTTPS`.

@@ -26,6 +26,8 @@ Ansible-проект для развёртывания `MediaWiki` с `PostgreSQ
 - `inventory/hosts.yml` - inventory
 - `group_vars/mediawiki/main.yml` - основные переменные
 - `group_vars/mediawiki/vault.yml.example` - пример файла с секретами
+- `group_vars/mediawiki_users_current.yml` - текущий снимок пользователей и прав без адресов email и паролей
+- `content/mediawiki_state_current.json` - текущие публичные настройки сайта, метаданные статей и перечень категорий
 - `roles/postgresql` - установка и инициализация PostgreSQL
 - `roles/mediawiki` - настройка MediaWiki, Nginx, PHP-FPM и SSL
 - `roles/zabbix_agent2` - настройка Zabbix Agent 2
@@ -133,6 +135,8 @@ https://<your-domain-or-ip>/wiki/Заглавная_страница
 ## Примечания
 
 - Проект предполагает, что PostgreSQL работает на том же хосте, что и MediaWiki.
+- Снимки состояния отражают сайт на момент формирования и не применяются playbook автоматически.
+- Тексты статей и загруженные файлы исключены из снимка, чтобы не публиковать служебные секреты.
 - По умолчанию используется MediaWiki версии `1.45.4`.
 - Citizen включён как тема по умолчанию; Vector остаётся доступен как резервная тема.
 - Веб-стек по умолчанию: `Nginx + PHP-FPM + HTTPS`.

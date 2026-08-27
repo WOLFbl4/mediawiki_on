@@ -430,6 +430,7 @@
     stdin: "{{ mediawiki_sidebar_desired.content | b64decode }}"
   args:
     chdir: "{{ mediawiki_current_path }}"
+  notify: Restart php-fpm
   when:
     - mediawiki_sidebar_enabled
     - mediawiki_sidebar_current.stdout != (mediawiki_sidebar_desired.content | b64decode)
@@ -477,6 +478,7 @@
     stdin: "{{ mediawiki_site_css_desired.content | b64decode }}"
   args:
     chdir: "{{ mediawiki_current_path }}"
+  notify: Restart php-fpm
   when:
     - mediawiki_site_css_enabled
     - mediawiki_site_css_current.stdout != (mediawiki_site_css_desired.content | b64decode)
